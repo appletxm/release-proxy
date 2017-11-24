@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const chalk = require('chalk')
 const filePath = path.join(__dirname, '../package.json')
 
 const packageFile = {
@@ -12,7 +13,12 @@ const packageFile = {
           throw error('There is no package.json file')
         } else {
           this.replaceVersion(version, data).then((res) => {
-            console.info('======replace version success=====')
+            console.log(chalk.cyan('Replace version number success.\n'))
+
+            if (res === true) {
+              return this.commitChanges(version)
+            }
+          }).then((ren) => {
           })
         }
       })
@@ -36,6 +42,42 @@ const packageFile = {
         })
       })
     }
+
+    return promise
+  },
+
+  commitChanges(version) {
+    let promise
+    let { exec } = require('child_process')
+
+    promise = new Promise((resolve) => {
+      exec('git commit -am "update version to ' + version + '"', (error, stdout, stderr) => {
+        if (error) {
+          throw error('commit package.json file failed')
+          return
+        }
+        console.log(`stdout: ${stdout}`)
+        console.log(`stderr: ${stderr}`)
+
+        console.log(chalk.cyan('Replace version number success.\n'))
+
+        resolve(true)
+      })
+
+      //   ls.stdout.on('data', (data) => {
+      //     console.log(`stdout: ${data}`)
+      //     resolve(true)
+      //   })
+
+      //   ls.stderr.on('data', (data) => {
+      //     console.log(`stderr: ${data}`)
+      //     throw error('Commit package.json file failed')
+      //   })
+
+    //   ls.on('close', (code) => {
+    //     console.log(`子进程退出码：${code}`)
+    //   })
+    })
 
     return promise
   }

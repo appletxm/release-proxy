@@ -1,6 +1,6 @@
 {
   "name": "rf-express-mobile",
-  "version": "v2.0.0",
+  "version": "v2.0.1",
   "dependencies": {
     "axios": "0.16.2",
     "lodash": "4.17.4",
@@ -18,7 +18,8 @@
     "dev": "npm run clean && node scripts/devServer.js development",
     "build": "npm run clean && npm run uglify && node scripts/build.js production",
     "build-for-test": "npm run clean && npm run uglify && node scripts/build.js production test",
-    "eslint": "eslint --config .eslintrc.js src/js/**/*.js"
+    "eslint": "eslint --config .eslintrc.js src/js/**/*.js",
+    "release": "node scripts/release.js"
   },
   "pre-commit": [
     "eslint"
