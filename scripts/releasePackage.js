@@ -13,7 +13,7 @@ const packageFile = {
           throw error('There is no package.json file')
         } else {
           this.replaceVersion(version, data).then((res) => {
-            console.log(chalk.cyan('Replace version number success.\n'))
+            console.log(chalk.cyan('\n Replace version number success.\n'))
 
             if (res === true) {
               return this.commitChanges(version)
@@ -59,7 +59,7 @@ const packageFile = {
         }
         // console.log(`stdout: ${stdout}`)
         // console.log(`stderr: ${stderr}`)
-        console.log(chalk.cyan('Replace version number success.\n'))
+        console.log(chalk.cyan('\n Replace version number success.\n'))
 
         resolve(true)
       })
