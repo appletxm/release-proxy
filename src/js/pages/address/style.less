@@ -1,0 +1,136 @@
+@btn-height: .4rem;
+
+.module-address{
+  position: fixed;
+  padding: 0.1rem;
+  top: 0;
+  left:0;
+  bottom: @foot-height;
+  width: 100%;
+
+  .yd-ui-tab{
+    display: none;
+  }
+
+  .address-list{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: @btn-height;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    .emtpy-info {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #777;
+    }
+  }
+
+  .module-login .yd-ui-tab {
+    height: .46rem;
+  }
+
+  .cell{
+    border-top: 1px solid @gray-dark;
+    margin: @page-gap;
+    background-color: @white;
+
+    h1{
+      font-size: @font-s;
+      color: @black-dark;
+      font-weight: normal;
+      padding: .15rem;
+    }
+
+    p{
+      line-height: .2rem;
+      color: @black-light;
+      font-size: @font-xs;
+      padding: 0 .15rem;
+      word-wrap: break-word;
+      word-break: break-all;
+    }
+
+    footer{
+      border-top: 1px solid @gray;
+      display: block;
+      margin-top: .15rem;
+      padding: .15rem;
+
+      &:after{
+        content: "";
+        clear: both;
+        display: block;
+      }
+
+      .check{
+        float: left;
+      }
+
+      .edit{
+        float: right;
+      }
+
+      button{
+        border: 0;
+        background-color: transparent;
+        margin-right: .05rem;
+
+        span{
+          font-size: @font-xs;
+          color: @green;
+
+          &.icon-uncheck:before, &.icon-checked:before{
+            font-size: @font-xs;
+          }
+
+          &.icon-delete{
+            color: @red-light;
+          }
+
+          &:before{
+            font-size: @font-s;
+            margin-right: .03rem;
+          }
+        }
+      }
+    }
+  }
+
+  .footer-btn{
+    height: @btn-height;
+    position: absolute;
+    bottom: 0;
+    left:0;
+    width: 100%;
+    background-color: @white;
+
+    button{
+      height: @btn-height;
+      width: 100%;
+      border: 0;
+      background: @green;
+      color: @white;
+      font-size: @font-xs;
+
+      &:active{
+        background: @green-dark;
+      }
+    }
+  }
+
+  &.need-tab{
+    .yd-ui-tab{
+      display: flex;
+    }
+
+    .address-list{
+      top: 0.5rem;
+    }
+  }
+}
+
+

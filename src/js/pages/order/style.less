@@ -1,0 +1,81 @@
+@import "../../../css/variables.less";
+@import "../../../css/function.less";
+.order-item {
+  font-size: @font-xs;
+  font-size: 0.14rem;
+  background: #fff;
+  padding: 0.1rem;
+  margin-bottom: 0.1rem;
+  display: flex;
+  .cl-left {
+    width: 80%
+  }
+  .cl-right {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    width: 20%;
+    border-left: 1px solid #e2e2e2;
+  }
+  .row {
+    margin-bottom: 0.1rem;
+  }
+  .title-info {
+    font-size: 0.14rem;
+    color: #a7a7a7;
+  }
+  .order {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .order-info {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .info-wrapper{
+    .city {
+      font-size: 0.17rem;
+    }
+    .name {
+      text-align: center;
+    }
+  }
+  .order-status {
+    position: relative;
+    width: 1.2rem;
+    text-align: center;
+    color: #a7a7a7;
+  }
+  .order-status-text {
+    position: absolute;
+    transform: translate(-50%, -0.05rem);
+    left: 50%;
+    width: 0.8rem;
+    height: 0.2rem;
+    background: #fff;
+    margin-top:.04rem;
+  }
+  .order-status-bg{
+    width: 1.2rem;
+    height: 0.3rem;
+    background: url('./images/orderStatusBg.png') no-repeat;
+    background-size: contain;
+  }
+  .order-btn {
+    color: @btnBlue;
+    white-space: nowrap;
+  }
+}
+    .load-more{
+      .load-more-tips{
+        color:#a7a7a7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+

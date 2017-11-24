@@ -1,0 +1,7 @@
+<div class="component-count-down">
+  <button class="valid-code" :disabled="isDisabled" @click="$getCode" v-model="code">
+    <mt-spinner type="fading-circle" v-show="isGettingCode"></mt-spinner>
+    <span v-show="isDisabled">
+      <span>{{countDownNo}}</span>s</span> {{ isDisabled ? '重新获取' : '发送验证码' }}
+  </button>
+</div>

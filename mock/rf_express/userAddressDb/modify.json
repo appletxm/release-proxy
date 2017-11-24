@@ -1,0 +1,19 @@
+{
+  "code": "200",
+  "message": "操作成功",
+  "detailMessage": null,
+  "data": [
+    {
+      "id": 8,
+      "userId": "198213",
+      "name": "测试用户",
+      "phone": "13896521345",
+      "province": "广东省",
+      "city": "广州市",
+      "district": "天河区",
+      "address": "珠江新城",
+      "addressType": 1,
+      "defaultFlag": 1
+    }
+  ]
+}

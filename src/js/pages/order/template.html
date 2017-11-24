@@ -1,0 +1,47 @@
+<div class="order-list">
+  <list-loader :isEmpty="orderList.length <= 0" :isLoading="isLoading" @loadMore="loadMore" :isShowLoadMore="curPage !== 0 && curPage<totalPage"
+    marginBottom=".5rem">
+    <div class="empty-info" slot="empty-info">您未有订单哦 &gt;_&lt; !</div>
+
+    <div class="order-item" v-for="item in orderList" slot="list-data">
+      <div class="cl-left" @click="openDetail(item)">
+        <div class="row title-info">
+          <div>运单编号：{{item.expressId}}</div>
+          <div>下单时间：{{moment(item.orderTime).format('YYYY-MM-DD HH:MM')}}</div>
+        </div>
+        <div class="row order">
+          <div class="order-info">
+            <div class="sender info-wrapper">
+              <span class="city">{{item.senderCity}}</span>
+              <div class="name">{{item.senderName}}</div>
+            </div>
+            <div class="order-status info-wrapper">
+              <div class="order-status-text">
+                {{orderStatusName(item.orderStatus)}}
+              </div>
+              <div class="order-status-bg"></div>
+            </div>
+            <div class="receiver info-wrapper">
+              <span class="city">{{item.receiverCity}}</span>
+              <div class="name">{{item.receiverName}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cl-right">
+        <div class="row">
+          <div class="order-btn">
+            <router-link :to="{path:'/trans/'+item.expressId, query:{orderStatus: item.orderStatus}}">查看
+              <br>物流</router-link>
+          </div>
+        </div>
+      </div>
+    </div>
+  </list-loader>
+
+  <order-detail-dialog v-if="isShowDetail" :closeFun="closeDetail" :data="showDetailData"></order-detail-dialog>
+  <pop-dialog-login :is-need-foot="false" :is-pop-show="isShowLogin" :close-cb="closeLoginCb">
+    <span slot="popTitle">登录</span>
+    <user-login slot="popBody" :login-show="true" :close-cb="closeLoginCb" :login-success-cb="loginSuccessCb" :need-register="true"></user-login>
+  </pop-dialog-login>
+</div>

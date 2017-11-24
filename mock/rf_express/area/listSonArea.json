@@ -1,0 +1,205 @@
+{
+  "code": "200",
+  "message": "操作成功",
+  "detailMessage": "操作成功",
+  "data": [
+    {
+      "areaCode": "120000",
+      "areaName": "天津市",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "130000",
+      "areaName": "河北省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "140000",
+      "areaName": "山西省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "150000",
+      "areaName": "内蒙古自治区",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "210000",
+      "areaName": "辽宁省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "220000",
+      "areaName": "吉林省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "230000",
+      "areaName": "黑龙江省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "310000",
+      "areaName": "上海市",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "320000",
+      "areaName": "江苏省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "330000",
+      "areaName": "浙江省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "340000",
+      "areaName": "安徽省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "350000",
+      "areaName": "福建省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "360000",
+      "areaName": "江西省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "370000",
+      "areaName": "山东省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "410000",
+      "areaName": "河南省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "420000",
+      "areaName": "湖北省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "430000",
+      "areaName": "湖南省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "440000",
+      "areaName": "广东省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "450000",
+      "areaName": "广西壮族自治区",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "460000",
+      "areaName": "海南省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "500000",
+      "areaName": "重庆市",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "510000",
+      "areaName": "四川省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "520000",
+      "areaName": "贵州省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "530000",
+      "areaName": "云南省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "540000",
+      "areaName": "西藏自治区",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "610000",
+      "areaName": "陕西省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "620000",
+      "areaName": "甘肃省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "630000",
+      "areaName": "青海省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "640000",
+      "areaName": "宁夏回族自治区",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "650000",
+      "areaName": "新疆维吾尔自治区",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "710000",
+      "areaName": "台湾省",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "810000",
+      "areaName": "香港特别行政区",
+      "shortName": null,
+      "parentCode": "1"
+    },
+    {
+      "areaCode": "820000",
+      "areaName": "澳门特别行政区",
+      "shortName": null,
+      "parentCode": "1"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "code": "200",
+  "message": "操作成功",
+  "detailMessage": null,
+  "data": [
+    [
+      {
+        "id": 10,
+        "userId": "13333333333",
+        "name": "test",
+        "phone": "13333333333",
+        "province": "广东省",
+        "city": "广州市",
+        "district": "花都区",
+        "address": "..",
+        "addressType": 1,
+        "defaultFlag": 1,
+        "areaCode": "130105"
+      }
+    ]
+  ]
+}

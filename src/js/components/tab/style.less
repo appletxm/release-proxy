@@ -1,0 +1,50 @@
+.yd-ui-tab{
+  display: flex;
+  display: -webkit-flex;
+  background-color: white;
+  padding: 0;
+  margin: 0;
+  border-bottom: 1px solid @gray-dark;
+  list-style: none;
+  font-size: @font-s;
+  height: @tab-height;
+  line-height: @tab-height;
+
+  li{
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    text-align: center;
+    position: relative;
+    background-color: @gray-light;
+    color: @black-light;
+
+    span{
+      display: inline-block;
+      position: relative;
+      padding: 0 .04rem;
+
+      &:after{
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        background-color: @red-light;
+        transition: 0.2s all ease-in-out;
+        height: 3px;
+      }
+    }
+
+    &.selected{
+      color: @red-light;
+      background: @white;
+      span {
+        &:after{
+          left: 0;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+<div class="component-edit-address-pop">
+  <section class="address-input-panel">
+    <div class="input-cell">
+      <p>姓名</p>
+      <p class="input">
+        <input type="text" value="{{addressData.name}}" placeholder="请输入姓名" maxlength="8" v-model="name" />
+      </p>
+    </div>
+
+    <div class="input-cell">
+      <p>联系电话</p>
+      <p class="input">
+        <input type="text" value="{{addressData.phone}}" placeholder="请输入11位手机号" v-model="phone" maxlength="20" />
+      </p>
+    </div>
+
+
+    <div class="input-cell">
+      <p>地址</p>
+      <div class="addr-picker" @click="$openAddressPanel()">
+        <p v-if="province || addressData.province">
+          <span>{{ province || addressData.province}}</span>
+          <span>{{ city || addressData.city}}</span>
+          <span>{{ district || addressData.district}}</span>
+        </p>
+
+        <p class="no-choose" v-else>
+          <span>省</span>
+          <span>市</span>
+          <span>区</span>
+        </p>
+
+        <span class="fr-iconfont icon-arrow-down"></span>
+      </div>
+    </div>
+    <div class="input-cell desc">
+      <p>详细地址</p>
+      <p class="input text-area">
+        <textarea placeholder="详细地址（请详细到门牌）" maxlength="50" v-model="address">{{address}}</textarea>
+      </p>
+    </div>
+  </section>
+
+  <section class="foot-button">
+    <button @click="$saveAddress()">保存</button>
+  </section>
+
+  <area-picker :props-show="propsShow" :props-result="propsResult" :close-cb="closeChooseArea" :confirm-cb="chooseArea"></area-picker>
+</div>

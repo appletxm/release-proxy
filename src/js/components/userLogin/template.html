@@ -1,0 +1,32 @@
+<div :class="['component-login', loginShow ? 'show' : '']">
+  <section>
+    <div class="row">
+      <span class="fr-iconfont icon-person"></span>
+      <input type="tel" value="" placeholder="请输入手机号" maxlength="11" v-model="userName" />
+    </div>
+
+    <div class="row">
+      <span class="fr-iconfont icon-password"></span>
+      <input type="password" value="" placeholder="请输入密码(6-16位字符)" maxlength="16" v-model="password" />
+    </div>
+  </section>
+
+  <div class="btn-row">
+    <mt-button type="primary" @click="$doLogin">登录</mt-button>
+  </div>
+
+  <div class="short-entrance">
+    <button @click="$doRegister" v-show="needRegister">注册</button>
+    <button @click="$doGetPassBack">忘记密码？</button>
+  </div>
+
+  <pop-dialog :is-need-foot="false" :is-pop-show="isShowResetPW" :close-cb="closePopCb">
+    <span slot="popTitle">找回密码</span>
+    <reset-pass-word slot="popBody" :is-show="true" :get-pass-success-cb="getPassSuccessCb"></reset-pass-word>
+  </pop-dialog>
+
+  <pop-dialog :is-need-foot="false" :is-pop-show="isShowRigister" :close-cb="closePopCb">
+    <span slot="popTitle">注册 </span>
+    <user-register slot="popBody" :register-show="true" :register-success-cb="getPassSuccessCb"></user-register>
+  </pop-dialog>
+</div>

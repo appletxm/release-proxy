@@ -1,0 +1,80 @@
+.components-pop-dark{
+  display: none;
+
+  &.show{
+    display: block;
+  }
+}
+
+.mask-layer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #000000;
+  opacity: 0.5;
+  z-index: 10;
+}
+
+.pop-dark-main {
+  position: fixed;
+  top: 1rem;
+  right: 0.3rem;
+  left: 0.3rem;
+  bottom: 1.7rem;
+  background-color: white;
+  border-radius: 0.04rem;
+  z-index: 11;
+  overflow-y: scroll;
+  padding-top: 0.2rem;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+  -webkit-overflow-scrolling: touch
+}
+
+.pop-dark-main::-webkit-scrollbar {
+  display: none;
+}
+
+.pop-dark-main h3 {
+  text-align: center;
+  font-size: @font-s;
+}
+
+.pop-dark-main h4 {
+  font-size: @font-s;
+}
+
+.pop-dark-main p {
+  font-size: @font-xs;
+  margin-bottom: 0.1rem;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.color-red {
+  color: @red-light;
+}
+
+.pop-dark-bottom {
+  position: fixed;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 11;
+}
+
+.close-btn {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #BABBBC;
+  background-color: rgba(0,0,0,0);
+  font-size: 32px;
+  color: #BABBBC;
+  padding-bottom: 4px;
+}

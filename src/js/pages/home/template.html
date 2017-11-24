@@ -1,0 +1,93 @@
+<section :class="['module-home']">
+	<section class="list-panel announcement-panel" v-show="announcement.length > 0">
+		<span class="fr-iconfont icon-announce"></span>
+		<div class="info" id="js-announce-outer">
+			<ul>
+				<li v-for="(item, index) in announcement" :key="index">{{item.announcement}}</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="list-panel addr-panel">
+		<div class="addr-send">
+			<span class="addr-icon">寄</span>
+			<span class="addr-info" v-if="defaultAddress && defaultAddress.phone" @click="$gotoEditPage(1)">
+				{{defaultAddress.name}}({{defaultAddress.phone}})
+				<i>{{defaultAddress.province}}{{defaultAddress.city}}{{defaultAddress.district}}{{defaultAddress.address}}</i>
+			</span>
+			<span class="addr-info addr-no-info" @click="$gotoEditPage(1)" v-else>请输入寄件地址</span>
+
+			<!-- <span class="fr-iconfont icon-arrow-right"></span> -->
+			<a @click="$gotToAddressList(1)">地址簿</a>
+		</div>
+
+		<div class="addr-send addr-recieve">
+			<span class="addr-icon">收</span>
+			<span class="addr-info" v-if="reviceAddress && reviceAddress.phone" @click="$gotoEditPage(2)">
+				{{reviceAddress.name}}({{reviceAddress.phone}})
+				<i>{{reviceAddress.province}}{{reviceAddress.city}}{{reviceAddress.district}}{{reviceAddress.address}}</i>
+			</span>
+			<span class="addr-info addr-no-info" @click="$gotoEditPage(2)" v-else>请输入收件地址</span>
+
+			<!-- <span class="fr-iconfont icon-arrow-right"></span> -->
+			<a @click="$gotToAddressList(2)">地址簿</a>
+		</div>
+	</section>
+
+	<section class="list-panel prod-detail-panel">
+		<div class="cell">
+			<p>重量/kg</p>
+			<p class="input">
+				<input type="number" value="" placeholder="不超过30kg" maxlength="5" v-model="productWeight" @blur="$getEstimateMoney()" />
+			</p>
+		</div>
+
+		<div class="cell">
+			<p>物品名称
+				<a @click="$showDangerList">(违禁物品须知)</a>
+			</p>
+			<p class="input">
+				<input type="text" value="" placeholder="物品名称如（五金）" v-model="productName" maxlength="20" />
+			</p>
+		</div>
+
+		<div class="cell desc">
+			<p>备注</p>
+			<p class="input">
+				<textarea placeholder="备注（选填）" maxlength="50" v-model="remark"></textarea>
+			</p>
+		</div>
+	</section>
+
+	<section class="money-estimate-panel">
+		<div class="info">
+			<p>运费预估:
+				<span>
+					<b>{{estimateMoney}}</b> 元
+					<!-- <span class="fr-iconfont icon-money">获取预估运费</span> -->
+				</span>
+			</p>
+			<p>
+				<span @click="$toggleContract()">
+					<span :class="['fr-iconfont', isAgreeed ? 'icon-checked' : 'icon-uncheck']"></span> 我已阅读并同意
+				</span>
+				<a @click="$openProtocol()">《服务协议》</a>
+			</p>
+		</div>
+
+		<mt-button type="primary" @click="$doSubmit()">提 交</mt-button>
+	</section>
+
+	<edit-address :show-edit="isEditShow" :address-type="addressType" :close-cb="closeEditPage" :set-success-cb="setAddressSuccessCb"></edit-address>
+
+	<pop-dialog-login :is-need-foot="false" :is-pop-show="isPopShow" :close-cb="closeLoginCb">
+		<span slot="popTitle">请登录</span>
+		<user-login slot="popBody" :login-show="true" :close-cb="closeLoginCb" :login-success-cb="loginSuccessCb" :need-register="true"></user-login>
+	</pop-dialog-login>
+
+	<pop-dark :is-show="needShowPopDark" :close-cb="closePopDarkCb">
+		<div id="popDarkContent" slot="content"></div>
+	</pop-dark>
+
+	</div>
+</section>

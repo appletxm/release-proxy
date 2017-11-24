@@ -1,0 +1,45 @@
+.mint-toast{
+  font-size: @font-xs;
+  .transition(opacity .2s ease)
+}
+.mint-button--primary{
+  background-color: @green-light;
+}
+
+.mint-toast-width{
+  max-width: 98%;
+  width: 70%;
+}
+
+.mint-toast-big{
+  max-width: 98%;
+  width: 80%;
+  text-align: center;
+
+  .mint-toast-text{
+    text-align: center;
+  }
+}
+
+.mint-toast-big-left{
+  &:extend(.mint-toast-big);
+  text-align: left;
+  .mint-toast-text{
+    text-align: left;
+  }
+}
+
+.mint-indicator-wrapper{
+  .mint-indicator-text{
+    font-size: @font-s;
+  }
+}
+
+.mint-msgbox{
+  font-size: @font-xs;
+  
+  .mint-msgbox-message{
+    text-align: left;
+    line-height: .24rem;
+  }
+}

@@ -1,0 +1,108 @@
+.component-dialog{
+  &:extend(.fixed-position);
+  z-index: 5;
+  display: none;
+  
+  &.actived{
+    display: block;
+  }
+
+  .mask{
+    &:extend(.fixed-position);
+    background: @black-dark;
+    opacity: 0.5;
+  }
+
+  .dialog-wrap{
+    &:extend(.fixed-position);
+    top: -0.1rem;
+    bottom: -0.1rem;
+    &:extend(.flex-center);
+
+    .inner{
+      text-align: center;
+      vertical-align: middle;
+      width: 100%;
+      &:extend(.flex-center);
+
+      .content{
+        min-width: 80%;
+        max-width: 90%;
+        min-height: 40%;
+        max-height: 60%;
+        background-color: @white;
+        margin: .1rem;
+        display: inline-block;
+        position: relative;
+        overflow: auto;
+
+        .box-shadow(0 0 5px rgba(0,0,0,0.3));
+
+        header{
+          line-height: .34rem;
+          font-size: @font-s;
+          color: @white;
+          background-color: @green;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+
+          .btn-close{
+            position: absolute;
+            top: 50%;
+            right: .04rem;
+            font-size: @font-s;
+            margin-top: -@font-s/2 - .02rem;
+            color: @white;
+            border: 0;
+            background: transparent;
+          }
+        }
+
+        footer{
+          display: block;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          border-top: 1px solid @gray;
+          height: .34rem;
+          overflow: hidden;
+
+          &.btn-no-2{
+            button{
+              width: 50%;
+
+              &:nth-of-type(2){
+                background: @green;
+                color: @white;
+              }
+            }
+          }
+          &.btn-no-3{
+            button{
+              width: 33.3%;
+            }
+          }
+
+          button{
+            border: 0;
+            background-color: transparent;
+            height: .34rem;
+            float: left;
+            color: @black-light;
+          }
+        }
+
+        .dialog-body{
+          padding: .34rem 0;
+
+          &.body-no-foot{
+            padding-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}

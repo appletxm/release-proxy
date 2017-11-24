@@ -1,0 +1,19 @@
+<div :class="['component-dialog', isPopShow ? 'actived' : '']">
+  <div class="mask"></div>
+  <div class="dialog-wrap">
+    <div class="inner">
+      <div class="content">
+        <header>
+          <slot name="popTitle"></slot>
+          <button class="fr-iconfont icon-delete btn-close" @click="$closePop"></button>
+        </header>
+        <div :class="['dialog-body', isNeedFoot ? '':'body-no-foot']">
+          <slot name="popBody"></slot>
+        </div>
+        <footer class="btn-no-2" v-show="isNeedFoot">
+          <slot name="popFooter"></slot>
+        </footer>
+      </div>
+    </div>
+  </div>
+</div>

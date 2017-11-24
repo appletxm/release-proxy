@@ -1,0 +1,75 @@
+<div class="order-detail-dialog">
+  <div class="mask"></div>
+  <div class="content">
+    <div class="header">
+        <div class="sender info-wrapper">
+          <span class="city">{{data.senderCity}}</span>
+          <div class="name">{{data.senderName}}</div>
+        </div>
+        <div class="order-status info-wrapper">
+          <div class="order-status-text">
+            {{name}}
+          </div>
+          <div class="order-status-bg"></div>
+        </div>
+        <div class="receiver info-wrapper">
+          <span class="city">{{data.receiverCity}}</span>
+          <div class="name">{{data.receiverName}}</div>
+        </div>
+      </div>
+
+    <div class="address">
+      <div class="addr">
+          <span class="addr-icon send-icon">寄</span>
+        <div class="addr-content">
+          <span class="addr-name">{{data.senderName}}</span>
+          <span class="addr-phone">{{data.senderPhone}}</span>
+          <div class="addr-detail">{{data.senderProvince}}&nbsp;{{data.senderCity}}&nbsp;{{data.senderDistrict}}&nbsp;{{data.senderAddress}}</div>
+       </div>
+      </div>
+      <div class="addr addr-receiver">
+          <span class="addr-icon receiver-icon">收</span>
+        <div class="addr-content">
+          <span class="addr-name">{{data.receiverName}}</span>
+          <span class="addr-phone">{{data.receiverPhone}}</span>
+          <div class="addr-detail">{{data.receiverProvince}}&nbsp;{{data.receiverCity}}&nbsp;{{data.receiverDistrict}}&nbsp;{{data.receiverAddress}}</div>
+       </div>
+      </div>
+    </div>
+
+    <div class="detail">
+      <div class="goodsDetail">物品名称：{{data.goodsName}}</div>
+      <div class="goodsDetail">
+        <div class="fl">
+          参考重量：{{data.estimateWeight}}KG
+      </div>
+        <div class="fr">
+          参考价格：{{data.estimatePrice}}元
+        </div>
+      </div>
+      <div class="goodsDetail">
+          <div class="fl" v-if='actualWeight' >
+              实际重量：{{data.actualWeight}}KG
+          </div>
+          <div class="fl" v-else>
+            实际重量：暂无
+        </div>
+          <div class="fr" v-if='actualPrice'>
+              实际价格：{{data.actualPrice}}元
+          </div>
+          <div class="fr" v-else>
+            实际价格：暂无
+        </div>
+      </div>
+      <div v-if="userRemark" class="goodsDetail">备注：{{data.userRemark}}</div>
+      <div v-else class="goodsDetail">备注：无</div>
+      
+      <div class="express">
+        <div class="expressId">运单编号：{{data.expressId}}</div>
+        <div class="orderTime">下单日期：{{data.orderTime}}</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="close" @click="closeDialog">X</div>
+</div>

@@ -1,0 +1,103 @@
+@login-row-height: .44rem;
+
+.component-login{
+  background-color: @white;
+
+  &.show{
+    width: 100%;
+  }
+
+  width: 90%;
+  background: @white;
+  display: inline-block;
+
+  section{
+    padding: 0 @con-gap;
+    margin-bottom: .3rem;
+    border: 1px solid @gray;
+  }
+
+  .row{
+    height: @login-row-height;
+    line-height: @login-row-height;
+    position: relative;
+    text-align: left;
+
+    &:nth-of-type(1){
+      .fr-iconfont{
+        font-size: @font-xl;
+      }
+
+      input{
+        border-bottom: 1px solid @gray;
+      }
+    }
+
+    .fr-iconfont{
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      font-size: @font-xxl;
+      color: @gray-dark;
+    }
+
+    input{
+      left: 0;
+      padding: 0 .4rem;
+
+      &:focus{
+        border-color: @green;
+      }
+    }
+  }
+
+  .btn-row{
+    button{
+      height: .36rem;
+      width: 100%;
+      font-size: @font-s;
+    }
+  }
+
+  .short-entrance{
+    margin-top: .14rem;
+    button{
+      float: left;
+      background: transparent;
+      border: 0;
+      display: inline;
+      color: @green;
+      font-size: @font-xs;
+
+      &:nth-of-type(1){
+        float: right;
+      }
+    }
+
+    &:after{
+      clear: both;
+      content: " ";
+    }
+  }
+
+  .row-valid{
+    border-top: 1px solid @gray;
+    .component-count-down{
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+}
+
+
+/*cover fix*/
+.dialog-body .component-login{
+  width: 90%;
+  margin:.2rem 0;
+
+  .row input{
+    padding-right: 0;
+  }
+}

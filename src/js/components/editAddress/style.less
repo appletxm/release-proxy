@@ -1,0 +1,103 @@
+.component-edit-address{
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 0;
+  bottom: 0;
+  background : @gray;
+  overflow: hidden;
+  z-index: 1;
+
+  .transition(width 0.2s ease);
+
+  &.show{
+    width: 100%;
+  }
+
+  .prod-detail-panel{
+    &:extend(.module-home .prod-detail-panel);
+    margin: @page-gap;
+    padding: @con-gap;
+    background: @white;
+
+    .addr-picker{
+      line-height: .46rem;
+      position: relative;
+      margin-bottom: @page-gap;
+      border-bottom: 1px solid @gray;
+
+      p{
+        color: @black-dark;
+      }
+      span{
+        padding: .05rem 0;
+      }
+
+      .no-choose{
+        color: @gray-dark-h;
+      }
+
+      .fr-iconfont{
+        position: absolute;
+        top:0;
+        right: 0;
+        font-size: @font-s;
+        padding: 0;
+        color: @gray-dark-h;
+      }
+    }
+
+    .cell.save-to-book{
+      border-top: 1px solid @gray;
+      width: 100%;
+      padding-top: @con-gap;
+      color: @green;
+      width: 100%;
+
+      .fr-iconfont{
+        font-size: @font-xs;
+      }
+    }
+  }
+
+  .foot-button{
+    margin:  -@page-gap @page-gap;
+    clear: both;
+    text-align: center;
+    padding: @page-gap*2 0;
+    background: @white;
+
+    button{
+      width: 50%;
+      font-size: @font-s;
+      height: .36rem;
+      outline: none;
+      margin-right: @page-gap;
+
+      &:nth-of-type(1){
+        width: 25%;
+        color: @black-light;
+
+        &:active{
+          color: @black-middle;
+        }
+      }
+
+      &:nth-of-type(2){
+        &:active{
+          color: @green-dark;
+        }
+      }
+
+      &:nth-of-type(3){
+        width: 50%;
+        background-color: @green;
+        color: @white;
+
+        &:active{
+          background-color: @green-light;
+        }
+      }
+    }
+  }
+}

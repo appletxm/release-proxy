@@ -1,0 +1,19 @@
+<div class="module-search-express">
+	<div class="search-panel">
+		<!-- <form> -->
+		<section>
+			<div class="row">
+				<input type="text" maxlength="20" value="" placeholder="请输入运单编号查询" v-model="expressNo" />
+			</div>
+			<button class="mint-button mint-button--primary mint-button--normal" @click="$doSearch">
+				<label class="mint-button-text">
+					<span class="fr-iconfont icon-search-new"></span>搜索</label>
+			</button>
+		</section>
+		<!-- </form> -->
+	</div>
+
+	<div :class="['express-info', showDetailPanel ? 'show' : '']">
+		<trans-detail :express-id="expressIdToDetail" :detail-loaded-cb="detailLoadedCb"></trans-detail>
+	</div>
+</div>

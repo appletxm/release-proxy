@@ -1,0 +1,62 @@
+<div :class="['component-edit-address', showEdit ? 'show' : '']">
+  <section class="prod-detail-panel">
+    <div class="cell">
+      <p>姓名</p>
+      <p class="input">
+        <input type="text" value="{{name}}" placeholder="请输入姓名" maxlength="8" v-model="name" />
+      </p>
+    </div>
+
+    <div class="cell">
+      <p>联系电话</p>
+      <p class="input">
+        <input type="text" value="{{phone}}" placeholder="请输入11位手机号" v-model="phone" maxlength="20" />
+      </p>
+    </div>
+
+    <div class="cell desc">
+      <p>地址</p>
+      <div class="addr-picker" @click="$openAddressPanel()">
+        <p v-if="province">
+          <span>{{ province}}</span>
+          <span>{{ city}}</span>
+          <span>{{ district}}</span>
+        </p>
+
+        <p class="no-choose" v-else>
+          <span>省</span>
+          <span>市</span>
+          <span>区</span>
+        </p>
+
+        <span class="fr-iconfont icon-arrow-down"></span>
+      </div>
+
+      <p>详细地址</p>
+      <p class="input">
+        <textarea placeholder="详细地址（请详细到门牌）" maxlength="50" v-model="address">{{address}}</textarea>
+      </p>
+    </div>
+
+    <div class="cell save-to-book">
+      <p @click="$toggleChecked()">
+        <span :class="['fr-iconfont', isChecked ? 'icon-checked':'icon-uncheck']"></span>
+        <span></span>添加到地址簿</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="foot-button">
+    <mt-button type="default" @click="$closeEditPage()">取消</mt-button>
+    <mt-button type="primary" @click="$saveAddress()">完成</mt-button>
+    <!-- <button @click="$gotoAddressList()">地址簿</button> -->
+  </section>
+
+  <pop-dialog-login :is-need-foot="false" :is-pop-show="isPopShow" :close-cb="closeLoginCb">
+    <span slot="popTitle">登录才能保存地址哦~</span>
+    <user-login slot="popBody" :login-show="true" :close-cb="closeLoginCb" :login-success-cb="loginSuccessCb" :need-register="true"></user-login>
+  </pop-dialog-login>
+
+  <area-picker :props-show="propsShow" :props-result="propsResult" :close-cb="closeChooseArea" :confirm-cb="chooseArea"></area-picker>
+
+</div>

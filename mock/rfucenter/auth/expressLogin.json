@@ -1,0 +1,18 @@
+{
+  "code": "200",
+  "message": "操作成功",
+  "detailMessage": "登录通过",
+  "data": [
+    {
+      "disable": 0,
+      "id": 100,
+      "openId": "wilber",
+      "phone": "18027337201",
+      "unionId": "tan",
+      "userPwd": "048728d0e5e2c2daf310582f6078fabe"
+    },
+    {
+      "loginToken": "1802733720104070dd9e16a44178bb8dc3b51728bfb"
+    }
+  ]
+}

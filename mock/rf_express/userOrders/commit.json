@@ -1,0 +1,47 @@
+{
+  "code": "500",
+  "message": "操作成功",
+  "detailMessage": null,
+  "data": [
+    {
+      "id": 218,
+      "orderId": "0012017083100000007",
+      "expressId": "221193908704",
+      "senderName": "刘伟锋",
+      "senderPhone": "18819309778",
+      "senderProvince": "广东省",
+      "senderCity": "广州市",
+      "senderDistrict": "花都区",
+      "senderAddress": "金港城豪华住宅区",
+      "senderAreaCode": "510000",
+      "receiverName": "曹智惟",
+      "receiverPhone": "18819478998",
+      "receiverProvince": "广东省",
+      "receiverCity": "广州市",
+      "receiverDistrict": "天河区",
+      "receiverAddress": "桃园中路337号",
+      "receiverAreaCode": "520000",
+      "goodsName": "衣服",
+      "estimateWeight": 5,
+      "actualWeight": null,
+      "userRemark": "小心轻放",
+      "pricingRemark": null,
+      "estimatePrice": 10,
+      "contractPrice": null,
+      "commissionRate": 0.1000000000000000055511151231257827021181583404541015625,
+      "commissionPrice": null,
+      "actualPrice": null,
+      "orderTime": "2017-08-29 00:00:00",
+      "startDate": null,
+      "endDate": null,
+      "orderStatus": 0,
+      "printStatus": 0,
+      "pricingStatus": 0,
+      "subscribeStatus": 1,
+      "orderContentSrc":"..."
+    }
+  ]
+}
+
+
+

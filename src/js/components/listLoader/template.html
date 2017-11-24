@@ -1,0 +1,17 @@
+<div class="list-loader">
+  <div class="pull-refresh"></div>
+  <slot name="empty-info" v-if="isEmpty"></slot>
+  <slot name="list-data">
+  </slot>
+  <div class="bottom-margin" :style="{marginBottom: marginBottom}"></div>
+  <div class="load-more" ref="loadMore" v-show="isShowLoadMore">
+    <slot name="load-more">
+      <slot name="load-more-tips">
+        <div class="load-more-tips">
+          <mt-spinner type="fading-circle"></mt-spinner>
+          上拉加载更多
+        </div>
+      </slot>
+    </slot>
+  </div>
+</div>

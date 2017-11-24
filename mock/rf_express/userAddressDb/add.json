@@ -1,0 +1,19 @@
+{
+  "code": "200",
+  "message": "操作成功",
+  "detailMessage": "出错了，出错了，出错了。。。。",
+  "data": [
+    {
+      "id": 17,
+      "userId": "13333333333",
+      "name": "test",
+      "phone": "13333333333",
+      "province": "广东省",
+      "city": "广州市",
+      "district": "天河区",
+      "address": "..",
+      "addressType": 1,
+      "defaultFlag": 0
+    }
+  ]
+}

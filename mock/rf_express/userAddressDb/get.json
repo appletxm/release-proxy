@@ -1,0 +1,69 @@
+{
+  "code": "200",
+  "message": "操作成功",
+  "detailMessage": null,
+  "data": [
+    [
+      {
+        "id": 1,
+        "userId": "18333333338",
+        "name": "test",
+        "phone": "18333333338",
+        "province": "广东省",
+        "city": "广州市",
+        "district": "天河区",
+        "address": "具体地址222222",
+        "addressType": 1,
+        "defaultFlag": 0
+      },
+      {
+        "id": 2,
+        "userId": "18333333339",
+        "name": "test",
+        "phone": "18333333339",
+        "province": "广东省",
+        "city": "广州市",
+        "district": "天河区",
+        "address": "具体地址222222",
+        "addressType": 1,
+        "defaultFlag": 0
+      },
+      {
+        "id": 10,
+        "userId": "18333333337",
+        "name": "test",
+        "phone": "18333333337",
+        "province": "广东省",
+        "city": "广州市",
+        "district": "天河区",
+        "address": "具体地址222222",
+        "addressType": 1,
+        "defaultFlag": 0
+      },
+      {
+        "id": 9,
+        "userId": "18333333333",
+        "name": "test",
+        "phone": "19833333333",
+        "province": "广东省",
+        "city": "广州市",
+        "district": "天河区",
+        "address": "具体地址..",
+        "addressType": 2,
+        "defaultFlag": 1
+      },
+      {
+        "id": 10,
+        "userId": "18333333333",
+        "name": "test",
+        "phone": "18333333333",
+        "province": "广东省",
+        "city": "广州市",
+        "district": "天河区",
+        "address": "具体地址222222",
+        "addressType": 2,
+        "defaultFlag": 0
+      }
+    ]
+  ]
+}

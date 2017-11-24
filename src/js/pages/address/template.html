@@ -1,0 +1,46 @@
+<section :class="['module-address', needTabFlag === 1 ? 'need-tab': '']">
+	<address-tab :tab-data="tabList" :change-tab="changeTab" :selected-index="tabSelectedIndex" ref="addressTab"></address-tab>
+
+	<div id="js-address-list-pannel" class="address-list">
+    <div class="emtpy-info" v-if="addressList.length <= 0">
+      <p v-if="addressType == 1">您未有寄件地址哦 &gt;_&lt; !</p>
+      <p v-if="addressType == 2">您未有收件地址哦 &gt;_&lt; !</p>
+    </div>
+		<div class="cell" v-for="(item, index) in addressList" :key="index" @click="$chooseAddress(item)">
+			<h1>
+				<span>{{ item.name }}</span>
+				<span>{{ item.phone }}</span>
+			</h1>
+			<p>{{ item.province + item.city + item.district + ' ' +item.address }}</p>
+			<footer>
+				<div class="check" v-show="addressType === 1">
+					<button>
+						<span :class="['fr-iconfont', item.defaultFlag === 1 ? 'icon-checked' : 'icon-uncheck']" @click.stop="$toggleSetDefault(item)">{{ item.defaultFlag === 1 ? '默认地址':'设为默认寄件地址'}}</span>
+					</button>
+				</div>
+				<div class="edit">
+					<button>
+						<span class="fr-iconfont icon-edit" @click.stop="$gotoEditPage(item)">编辑</span>
+					</button>
+					<button>
+						<span class="fr-iconfont icon-delete icon-dustin" @click.stop="$doDelete(item)">删除</span>
+					</button>
+				</div>
+			</footer>
+		</div>
+	</div>
+
+	<div class="footer-btn">
+		<button @click="$addNewAddress">新增地址</button>
+	</div>
+
+	<pop-dialog-login :is-need-foot="false" :is-pop-show="isPopLoginShow" :close-cb="closePopLogin">
+		<span slot="popTitle">登录</span>
+		<user-login slot="popBody" :login-show="true" :close-cb="closePopLogin" :login-success-cb="loginSuccessCb" :need-register="true"></user-login>
+	</pop-dialog-login>
+
+	<pop-dialog-login :is-need-foot="false" :is-pop-show="isEditPopShow" :close-cb="closeEditPage">
+		<span slot="popTitle">编辑地址</span>
+		<edit-address-pop slot="popBody" :address-data="beEditAddress" :address-type="addressType" :close-cb="closeEditPage" :save-success-cb="editAddressSuccessCb"></edit-address-pop>
+	</pop-dialog-login>
+</section>

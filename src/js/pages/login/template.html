@@ -1,0 +1,9 @@
+<div class="module-login">
+	<login-tab :tab-data="tabList" :change-tab="changeTab" :selected-index="tabSelectedIndex"></login-tab>
+	<div class="tab-con">
+		<user-login v-show="tabCurrentItem.id === 0" :login-show="loginShow" :close-cb="closeLoginCb" :login-success-cb="loginSuccessCb"
+		 :need-register="false"></user-login>
+
+		<user-register v-show="tabCurrentItem.id === 1" :register-show="registerShow" :close-cb="closeRegisterCb" :register-success-cb="registerSuccessCb"></user-register>
+	</div>
+</div>

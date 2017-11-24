@@ -1,0 +1,10 @@
+<div :class="['components-pop-dark', isShow ? 'show' : '']">
+  <div :class="['mask-layer']">
+  </div>
+  <div :class="['pop-dark-main']">
+    <slot name="content"></slot>
+  </div>
+  <div :class="['pop-dark-bottom']">
+    <button :class="['close-btn']" class="icon fr-iconfont icon-delete" @click="$closePopDark()"></button>
+  </div>
+</div>

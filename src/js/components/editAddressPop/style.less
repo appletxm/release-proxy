@@ -1,0 +1,79 @@
+@addr-input-height: .34rem;
+
+.component-edit-address-pop{
+  position: static;
+  height: 3.2rem;
+
+  .ProvCityBox{
+    bottom: @foot-height + .05rem;
+  }
+
+  .address-input-panel{
+    margin: @page-gap;
+    .input-cell{
+      &.desc{
+        margin-top: @page-gap;
+      }
+
+      p{
+        text-align: left;
+        font-size: @font-xs;
+        color: @black-middle;
+
+        &.input{
+          height: @addr-input-height;
+          position: relative;
+          margin-bottom: @page-gap;
+          border-bottom: 1px solid @gray;
+          
+          input,textarea{
+            color: @green;
+          }
+        }
+
+        &.text-area{
+          margin-top: @page-gap;
+        }
+      }
+
+      .addr-picker{
+        border-bottom: 1px solid @gray;
+        height: @addr-input-height;
+        position: relative;
+
+        p{
+          line-height: @addr-input-height;
+          color: @green;
+        }
+        p.no-choose{
+          color: @gray-dark;
+          line-height: @addr-input-height;
+        }
+      }
+    }
+
+    .fr-iconfont{
+      position: absolute;
+      top: 50%;
+      right: 0;
+      margin-top: -@font-xs/2;
+    }
+  }
+
+  .foot-button{
+    button{
+      height: .3rem;
+      background: @green;
+      border: 0;
+      color: @white;
+      width: 90%;
+      font-size: @font-s;
+
+      &:active{
+        background: @green-dark;
+      }
+
+      .border-radius(3px);
+    }
+  }
+}

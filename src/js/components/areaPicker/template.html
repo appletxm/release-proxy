@@ -1,0 +1,69 @@
+<div class="ProvCityBoxWarp">
+  <transition name="fade" mode="out-in">
+    <div class="ProvCityBoxBg" v-show="show" @click="_closePanel" @touchmove="_stopDef" @mousewheel="_stopDef"></div>
+  </transition>
+  <transition name="select">
+    <div class="ProvCityBox" v-show="show" @mousewheel="_stopDef">
+      <div class="ProvCityHeader">
+        <div class="ProvCityHeaderCancle" @click="_closePanel">{{cancel}}</div>
+        {{title}}
+        <div class="ProvCityHeaderConfirm" @click="submit">{{confirm}}</div>
+      </div>
+      <div class="ProvCityContent">
+        <div class="ProvCityContentList">
+          <ul ref:province-list :class="{'province_dragging': provinceState.dragging}" @touchstart="_onTouchStart('province', $event)"
+            @mousedown="_onTouchStart('province', $event)" :style="{'transform' : 'translate3d(0,' + provinceState.translateY + 'px, 0)'}">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li v-for="(item, index) in provinceState.data" :key="index" :class="{
+                                        'current': item.code === provinceState.selectedId,
+                                        'node1':  Math.abs(index - provinceState.index) == 1,
+                                        'node2':  Math.abs(index - provinceState.index) == 2,
+                                        'node3':  Math.abs(index - provinceState.index) >= 3
+                                    }">{{item.name}}</li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+        <div class="ProvCityContentList">
+          <ul ref:city-list :class="{'city_dragging': cityState.dragging}" @touchstart="_onTouchStart('city', $event)" @mousedown="_onTouchStart('city', $event)"
+            :style="{'transform' : 'translate3d(0,' + cityState.translateY + 'px, 0)'}">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li v-for="(item, index) in cityState.data" :key="index" :class="{
+                                        'current': item.code === cityState.selectedId,
+                                        'node1':  Math.abs(index - cityState.index) == 1,
+                                        'node2':  Math.abs(index - cityState.index) == 2,
+                                        'node3':  Math.abs(index - cityState.index) >= 3
+                                }">{{item.name}}</li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+        <div class="ProvCityContentList">
+          <ul ref:area-list :class="{'area_dragging': areaState.dragging}" @touchstart="_onTouchStart('area', $event)" @mousedown="_onTouchStart('area', $event)"
+            :style="{'transform' : 'translate3d(0,' + areaState.translateY + 'px, 0)'}">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li v-for="(item, index) in areaState.data" :key="index" :class="{
+                                'current': item.code === areaState.selectedId,
+                                'node1':  Math.abs(index - areaState.index) == 1,
+                                'node2':  Math.abs(index - areaState.index) == 2,
+                                'node3':  Math.abs(index - areaState.index) >= 3
+                            }">{{item.name}}</li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="ProvCitySelectedTop">
+      <hr class="ProvCitySelectedBottom">
+    </div>
+  </transition>
+</div>
