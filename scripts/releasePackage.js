@@ -19,6 +19,7 @@ const packageFile = {
               return this.commitChanges(version)
             }
           }).then((ren) => {
+            resolve(true)
           })
         }
       })
@@ -56,27 +57,12 @@ const packageFile = {
           throw error('commit package.json file failed')
           return
         }
-        console.log(`stdout: ${stdout}`)
-        console.log(`stderr: ${stderr}`)
-
+        // console.log(`stdout: ${stdout}`)
+        // console.log(`stderr: ${stderr}`)
         console.log(chalk.cyan('Replace version number success.\n'))
 
         resolve(true)
       })
-
-      //   ls.stdout.on('data', (data) => {
-      //     console.log(`stdout: ${data}`)
-      //     resolve(true)
-      //   })
-
-      //   ls.stderr.on('data', (data) => {
-      //     console.log(`stderr: ${data}`)
-      //     throw error('Commit package.json file failed')
-      //   })
-
-    //   ls.on('close', (code) => {
-    //     console.log(`子进程退出码：${code}`)
-    //   })
     })
 
     return promise

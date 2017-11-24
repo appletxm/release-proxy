@@ -2,7 +2,7 @@ const packageFile = require('./releasePackage')
 const version = process.argv ? (process.argv)[2] : ''
 const ora = require('ora')
 const chalk = require('chalk')
-const spinner = ora('Releasing version: ' + version + '...')
+const spinner = ora('Releasing version: ' + version + '...\n')
 spinner.start()
 
 packageFile.updateVersion(version).then((file) => {
