@@ -12,7 +12,6 @@ packageOperations.updateVersion(version)
     if (res === true) {
       return tagOperations.createTag(version)
     }
-    spinner.stop()
   })
   .then((res) => {
     if (res === true) {
