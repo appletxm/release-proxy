@@ -1,6 +1,6 @@
 {
   "name": "rf-express-mobile",
-  "version": "v2.0.1",
+  "version": "v2.0.2",
   "dependencies": {
     "axios": "0.16.2",
     "lodash": "4.17.4",
