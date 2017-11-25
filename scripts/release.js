@@ -1,5 +1,5 @@
 const packageOperations = require('./releasePackageOperations')
-// const tagOperations = require('./releaseTagOperation')
+const tagOperations = require('./releaseTagOperations')
 const version = process.argv ? (process.argv)[2] : ''
 const ora = require('ora')
 const chalk = require('chalk')
@@ -14,11 +14,12 @@ packageOperations.updateVersion(version)
     }
     spinner.stop()
   })
-  //   .then((res) => {
-  //     if (res === true) {
-  //       spinner.stop()
-  //     }
-  //   })
+  .then((res) => {
+    if (res === true) {
+      spinner.stop()
+    }
+  })
   .catch((err) => {
     console.error(err)
+    spinner.stop()
   })
