@@ -10,9 +10,6 @@ const tagOperations = {
 
     promise = new Promise((resolve) => {
       let cmd = 'git tag -a ' + version + ' -m "create tag version "' + version
-      // let cmd = 'git tag ' + version
-
-      console.info('\n*************', cmd)
 
       exec(cmd, (error, stdout, stderr) => {
         if (error) {
