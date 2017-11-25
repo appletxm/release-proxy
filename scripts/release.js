@@ -10,6 +10,7 @@ packageOperations.updateVersion(version)
   .then((res) => {
     // console.info('#####', file)
     if (res === true) {
+      console.info('#####', version)
       return tagOperations.createTag(version)
     }
   })
