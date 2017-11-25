@@ -4,6 +4,7 @@ const version = process.argv ? (process.argv)[2] : ''
 const ora = require('ora')
 const chalk = require('chalk')
 const spinner = ora('Releasing version: ' + version)
+
 spinner.start()
 
 packageOperations.updateVersion(version)
@@ -23,3 +24,10 @@ packageOperations.updateVersion(version)
     console.info(chalk.red(err))
     spinner.stop()
   })
+
+  // tagOperations.createTag(version).then((res) => {
+  //   spinner.stop()
+  // }).catch((err) => {
+  //   console.info(chalk.red(err))
+  //   spinner.stop()
+  // })

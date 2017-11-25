@@ -9,27 +9,25 @@ const tagOperations = {
     let { exec } = require('child_process')
 
     promise = new Promise((resolve) => {
-      // let cmd = 'git tag -a ' + version + " -m 'create tag version " + version + "'"
-      let cmd = 'git tag ' + version
+      let cmd = 'git tag -a ' + version + ' -m "create tag version "' + version
+      // let cmd = 'git tag ' + version
 
-      console.info('*************', cmd)
+      console.info('\n*************', cmd)
 
       exec(cmd, (error, stdout, stderr) => {
         if (error) {
           throw 'Create tag failed'
-          return
+        }else {
+          // console.log(`stdout: ${stdout}`)
+          // console.log(`stderr: ${stderr}`)
+          console.log(chalk.cyan('\n Create tag version ' + version + ' success.\n'))
+
+          this.pushNewTag(version).then((res) => {
+            if (res === true) {
+              resolve(true)
+            }
+          })
         }
-        // console.log(`stdout: ${stdout}`)
-        // console.log(`stderr: ${stderr}`)
-        // console.log(chalk.cyan('\n Create tag version ' + version + ' success.\n'))
-
-        // this.pushNewTag(version).then((res) => {
-        //   if (res === true) {
-        //     resolve(true)
-        //   }
-        // })
-
-        resolve(true)
       })
     })
 
@@ -43,14 +41,14 @@ const tagOperations = {
     promise = new Promise((resolve) => {
       exec('git push origin ' + version, (error, stdout, stderr) => {
         if (error) {
-          throw error('Push tag to origin failed')
-          return
-        }
-        // console.log(`stdout: ${stdout}`)
-        // console.log(`stderr: ${stderr}`)
-        console.log(chalk.cyan('\n Push tag ' + version + ' to origin success.\n'))
+          throw 'Push tag to origin failed'
+        } else {
+          // console.log(`stdout: ${stdout}`)
+          // console.log(`stderr: ${stderr}`)
+          console.log(chalk.cyan('\n Push tag ' + version + ' to origin success.\n'))
 
-        resolve(true)
+          resolve(true)
+        }
       })
     })
 
