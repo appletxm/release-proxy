@@ -66,11 +66,6 @@ const packageFile = {
     promise = new Promise((resolve) => {
       exec('git add .', (error, stdout, stderr) => {
         if (error) {
-          console.info('========1========')
-          console.log(`stdout: ${stdout}`)
-          console.log(`stderr: ${stderr}`)
-          console.info('========2========')
-          console.info(error)
           throw new Error('Add package.json file failed')
           process.exit(1)
         }else {
@@ -93,11 +88,6 @@ const packageFile = {
     promise = new Promise((resolve) => {
       exec('git commit -am "update version to ' + version + '"', (error, stdout, stderr) => {
         if (error) {
-          console.info('========3========')
-          console.log(`stdout: ${stdout}`)
-          console.log(`stderr: ${stderr}`)
-          console.info('========4========')
-          console.info(error)
           throw new Error('Commit package.json file failed')
           process.exit(1)
         }else {

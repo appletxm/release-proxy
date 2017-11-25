@@ -9,7 +9,11 @@ const tagOperations = {
     let { exec } = require('child_process')
 
     promise = new Promise((resolve) => {
-      exec('git tag -a ' + version + ' -m "create tag version ' + version + '"', (error, stdout, stderr) => {
+      let cmd = 'git tag -a ' + version + ' -m "create tag version ' + version + '"'
+
+      console.info('*************', cmd)
+
+      exec(cmd, (error, stdout, stderr) => {
         if (error) {
           throw 'Create tag failed'
           return
