@@ -38,7 +38,7 @@ const tagOperations = {
     promise = new Promise((resolve) => {
       exec('git push origin ' + version, (error, stdout, stderr) => {
         if (error) {
-          throw 'Push tag to origin failed'
+          throw 'Push tag ' + version + 'to origin failed'
         } else {
           // console.log(`stdout: ${stdout}`)
           // console.log(`stderr: ${stderr}`)
