@@ -51,7 +51,7 @@ function assignRouter (req, res, next) {
     console.log('mock reqPath', reqPath)
     getMockFile(reqPath + '.json', res)
   }else if (process.env.NODE_ENV === 'development') {
-    // serverProxy.doProxy(getProxyConfig(req), req, res)
+    serverProxy.doProxy(getProxyConfig(req), req, res)
   }
   if (next) {
     next()

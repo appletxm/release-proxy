@@ -1,6 +1,11 @@
 var express = require('express')
 var app = express()
-var serverConfig = (require('../config/env'))['development']['api']
+// var serverConfig = (require('../config/env'))['development']['api']
+
+var serverConfig = {
+  host: '127.0.0.1',
+  port: '9000'
+}
 
 console.info('serverConfig:', serverConfig)
 
