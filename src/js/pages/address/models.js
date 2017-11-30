@@ -14,6 +14,7 @@ export default {
     _this.$indicator.open({
       spinnerType: 'fading-circle'
     })
+    _this.addressList = [{address: '', addressType: '', city: '', defaultFlag: '', district: '', id: '', name: '', phone: '', province: '', userId: ''}]
 
     params = {
       userId: this.getUserId(_this),
@@ -27,8 +28,10 @@ export default {
           return item.defaultFlag === 1
         })[0]
         _this.$indicator.close()
+        _this.isLoaded = true
       })
       .catch((error) => {
+        _this.isLoaded = true
         console.error(error)
         _this.$indicator.close()
       })
@@ -50,18 +53,16 @@ export default {
         item.defaultFlag = 1
         if (_this.odlDefaultAddress) {
           return this.cancelDefaultAddress(_this)
-        } else {
-          _this.odlDefaultAddress = JSON.parse(JSON.stringify(item))
-          _this.$indicator.close()
         }
-
         this.saveAddressToStore(_this, res)
       })
       .then((res) => {
-        _this.odlDefaultAddress.defaultFlag = 0
-        _this.odlDefaultAddress = JSON.parse(JSON.stringify(item))
+        if (_this.odlDefaultAddress) {
+          _this.odlDefaultAddress.defaultFlag = 0
+        }
+        _this.odlDefaultAddress = item
         _this.$indicator.close()
-      // this.getUserAddress(_this)
+      // this.getUserAddress(_this, _this.addressType)
       })
       .catch((error) => {
         _this.$indicator.close()
@@ -126,13 +127,8 @@ export default {
 
     axios.post(apiUrls.deleteAddress, params)
       .then((res) => {
-        if (this.getAddressType(_this) === 1 && storage.getDefaultAddressToStorage().id === item.id) {
-          storage.setDefaultAddressToStorage(null)
-        }
-        if (this.getAddressType(_this) === 2 && storage.getReceiveAddressToStorage().id === item.id) {
-          storage.setReceiveAddressToStorage(null)
-        }
-        this.getUserAddress(_this)
+        this.updateStorageAfterEditAddress(_this, item, true)
+        this.getUserAddress(_this, _this.addressType)
       })
       .catch((error) => {
         console.error(error)
@@ -168,5 +164,18 @@ export default {
 
   getNeedTabFlag() {
     return storage.getNeedAddressTabFlag()
+  },
+
+  updateStorageAfterEditAddress(_this, item, isDelete) {
+    let defaultAddress = storage.getDefaultAddressToStorage()
+    let receiveDefaultAddress = storage.getReceiveAddressToStorage()
+    let addressType = this.getAddressType(_this)
+
+    if (addressType === 1 && defaultAddress && defaultAddress.id === item.id) {
+      storage.setDefaultAddressToStorage(isDelete ? null : item)
+    }
+    if (addressType === 2 && receiveDefaultAddress && receiveDefaultAddress.id === item.id) {
+      storage.setReceiveAddressToStorage(isDelete ? null : item)
+    }
   }
 }

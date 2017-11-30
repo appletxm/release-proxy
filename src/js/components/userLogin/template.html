@@ -7,7 +7,7 @@
 
     <div class="row">
       <span class="fr-iconfont icon-password"></span>
-      <input type="password" value="" placeholder="请输入密码(6-16位字符)" maxlength="16" v-model="password" />
+      <input type="password" value="" placeholder="请输入密码(6-15位字符)" maxlength="15" v-model="password" />
     </div>
   </section>
 
@@ -27,6 +27,6 @@
 
   <pop-dialog :is-need-foot="false" :is-pop-show="isShowRigister" :close-cb="closePopCb">
     <span slot="popTitle">注册 </span>
-    <user-register slot="popBody" :register-show="true" :register-success-cb="getPassSuccessCb"></user-register>
+    <user-register slot="popBody" :register-show="true" :register-success-cb="registerSuccessCb"></user-register>
   </pop-dialog>
 </div>

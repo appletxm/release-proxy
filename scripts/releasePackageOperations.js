@@ -10,7 +10,7 @@ const packageFile = {
     promise = new Promise((resolve) => {
       fs.readFile(filePath, {flag: 'r+', encoding: 'utf8'}, (err, data) => {
         if (err) {
-          throw 'There is no package.json file'
+          throw new Error('There is no package.json file', err)
           process.exit(1)
         } else {
           this.replaceVersion(version, data).then((res) => {
@@ -47,7 +47,7 @@ const packageFile = {
       promise = new Promise((resolve, reject) => {
         fs.writeFile(filePath, data, function (err) {
           if (err) {
-            throw 'Replace version number failed for package.json file'
+            throw new Error('Replace version number failed for package.json file, ', err)
             process.exit(1)
           }else {
             resolve(true)
@@ -66,7 +66,7 @@ const packageFile = {
     promise = new Promise((resolve) => {
       exec('git add .', (error, stdout, stderr) => {
         if (error) {
-          throw new Error('Add package.json file failed')
+          throw new Error('Add package.json file failed, ', error)
           process.exit(1)
         }else {
           // console.log(`stdout: ${stdout}`)
@@ -88,7 +88,7 @@ const packageFile = {
     promise = new Promise((resolve) => {
       exec('git commit -am "update version to ' + version + '"', (error, stdout, stderr) => {
         if (error) {
-          throw new Error('Commit package.json file failed')
+          throw new Error('Commit package.json file failed, ', error)
           process.exit(1)
         }else {
           // console.log(`stdout: ${stdout}`)
@@ -108,15 +108,15 @@ const packageFile = {
     let { exec } = require('child_process')
 
     promise = new Promise((resolve) => {
-      exec('git push origin master', (error, stdout, stderr) => {
+      exec('git push origin ' + `${global.branch}`, (error, stdout, stderr) => {
         console.log(`stdout: ${stderr}`)
         if (error) {
-          throw 'Push package.json file changes to origin master failed'
+          throw new Error('Push package.json file changes to origin failed', error)
           process.exit(1)
         } else {
           // console.log(`stdout: ${stdout}`)
           // console.log(`stderr: ${stderr}`)
-          console.log(chalk.cyan('\n Push package.json file to origin master branch success.\n'))
+          console.log(chalk.cyan('\n Push package.json file to origin branch success.\n'))
 
           resolve(true)
         }

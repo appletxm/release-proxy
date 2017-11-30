@@ -8,15 +8,15 @@
     </div>
 
     <div class="input-cell">
-      <p>联系电话</p>
+      <p>手机号</p>
       <p class="input">
-        <input type="text" value="{{addressData.phone}}" placeholder="请输入11位手机号" v-model="phone" maxlength="20" />
+        <input type="text" value="{{addressData.phone}}" placeholder="请输入11位手机号" v-model="phone" maxlength="11" />
       </p>
     </div>
 
 
     <div class="input-cell">
-      <p>地址</p>
+      <p>区域地址</p>
       <div class="addr-picker" @click="$openAddressPanel()">
         <p v-if="province || addressData.province">
           <span>{{ province || addressData.province}}</span>

@@ -1,0 +1,66 @@
+.text-ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.input-style {
+  font-size: 0.14rem;
+  line-height: .18rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 98%;
+  height: 100%;
+  border: 0;
+  border-bottom: 1px solid white;
+  outline: none;
+  font-family: 'yahei', 'Arial';
+  -webkit-transition: all 0.6s ease;
+  -moz-transition: all 0.6s ease;
+  transition: all 0.6s ease;
+}
+.input-style:focus {
+  border-bottom: 1px solid #379dab;
+}
+.input-style.error {
+  border-color: #ff404c;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.fixed-position {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+.trans-detail-page {
+  font-size: 0.14rem;
+  margin-bottom: 0.6rem;
+}
+.trans-detail-page section {
+  background: #fff;
+  padding: 0.1rem;
+  margin-bottom: 0.1rem;
+}
+.trans-detail-page .header {
+  background-color: #379dab;
+  color: #fff;
+  font-size: 16px;
+  line-height: .4rem;
+  height: .4rem;
+  width: 100%;
+  position: relative;
+}
+.trans-detail-page .header .header-btn {
+  position: absolute;
+  left: 0.1rem;
+}
+.trans-detail-page .header .header-title {
+  display: inherit;
+  text-align: center;
+}

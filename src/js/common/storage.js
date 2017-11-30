@@ -61,5 +61,16 @@ export default {
 
   loginOutRemoveAll() {
     localStorage.clear()
+  },
+  get(key) {
+    let res = localStorage.getItem(key)
+    try {
+      return JSON.parse(res)
+    } catch (e) {
+      return res
+    }
+  },
+  set(key, item) {
+    localStorage.setItem(key, item)
   }
 }

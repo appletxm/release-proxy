@@ -1,32 +1,41 @@
-var webpack = require('webpack'),
-  path = require('path'),
-  webpackConfig = require('../config/webpack.config'),
-  ora = require('ora'),
-  rm = require('rimraf'),
-  path = require('path'),
-  chalk = require('chalk'),
-  spinner
+const rm = require('rimraf')
+const webpackConfig = require('../config/webpack.config')
+const ora = require('ora')
+const path = require('path')
+const chalk = require('chalk')
+const webpack = require('webpack')
+const distOperations = require('./releaseDistOperations')
 
-spinner = ora('building for production...')
-spinner.start()
-rm(path.resolve('./dist/'), function (err) {
-  if (err) throw err
-  webpack(webpackConfig, function (err, stats) {
-    spinner.stop()
-    if (err) throw err
-    spinner.stop()
-    process.stdout.write(stats.toString({
-        colors: true,
-        modules: false,
-        children: false,
-        chunks: false,
-        chunkModules: false
-      }) + '\n\n')
+function build () {
+  var spinner = ora('building for production...')
 
-    console.log(chalk.cyan('  Build complete.\n'))
-    console.log(chalk.yellow(
-      '  Tip: built files are meant to be served over an HTTP server.\n' +
-      "  Opening index.html over file:// won't work.\n"
-    ))
+  spinner.start()
+
+  rm(path.resolve('./dist/'), function (err) {
+    if (err) {
+      spinner.stop()
+      throw err
+    }
+
+    webpack(webpackConfig, function (err, stats) {
+      if (err) {
+        spinner.stop()
+        throw err
+      }
+      distOperations.createTagFile().then((_) => {
+        spinner.stop()
+        process.stdout.write(stats.toString({
+            colors: true,
+            modules: false,
+            children: false,
+            chunks: false,
+            chunkModules: false
+          }) + '\n\n')
+        console.log(chalk.magenta('*****************build success****************'))
+        console.log(chalk.cyan(`build success : $tarName(${_.versionId})`))
+      })
+    })
   })
-})
+}
+
+build()

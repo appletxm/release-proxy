@@ -100,10 +100,10 @@ export default {
       this.isPopShow = false
     },
 
-    $saveAddressSuccess() {
+    $saveAddressSuccess(item) {
       this.isPopShow = false
       if (checkType.isFunction(this.saveSuccessCb) === true) {
-        this.saveSuccessCb()
+        this.saveSuccessCb(true, item)
       }
     }
   },

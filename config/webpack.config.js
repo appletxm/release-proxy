@@ -29,7 +29,13 @@ if (envKeyWord === 'development') {
 } else if (envKeyWord === 'test') {
   envCfg = 'envTest'
 } else {
-  envCfg = (process.argv)[3] && (process.argv)[3] === 'test' ? 'envTest' : 'envProduction'
+  if ((process.argv)[3] && (process.argv)[3] === 'test') {
+    envCfg = 'envTest'
+  } else if ((process.argv)[3] && (process.argv)[3] === 'pre') {
+    envCfg = 'envPre'
+  } else {
+    envCfg = 'envProduction'
+  }
 }
 webpackConfig['resolve']['alias']['env.cfg'] = path.join(__dirname, './' + envCfg + '.js')
 

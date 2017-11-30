@@ -2,6 +2,7 @@ export default {
   normal(value, min, max) {
     let regStr,
       regexp
+
     regStr = '[\\u4e00-\\u9fa5|\\x00-\\xff|\\d|\\w|_|\\$]'
     if (min && max) {
       regStr += '{' + min + ',' + max + '}'
@@ -20,6 +21,11 @@ export default {
   text(value, min, max) {
     let regStr,
       regexp
+
+    if (typeof value !== 'string' && typeof value !== 'number') {
+      return false
+    }
+
     regStr = '[\\u4e00-\\u9fa5|\\x00-\\xff|\\d|\\w|_|\\$|\\.|。|,|，|（|）|\\(|\\)]'
     if (min && max) {
       regStr += '{' + min + ',' + max + '}'
@@ -39,7 +45,8 @@ export default {
     let regStr,
       regexp
 
-    regStr = '\\d{11}'
+    regStr = '1[3|4|5|7|8]\\d{9}'
+
     regStr = '^' + regStr + '$'
     regexp = new RegExp(regStr)
 

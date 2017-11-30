@@ -15,7 +15,7 @@ export default {
     if (formValidate.phone(_this.userName) === false) {
       msg = '请输入正确的手机号'
       res = false
-    } else if (formValidate.password(_this.password, 6, 16) === false) {
+    } else if (formValidate.password(_this.password, 6, 15) === false) {
       msg = '请输入您的密码'
       res = false
     } else if (formValidate.validateCode(_this.validateCode, 4, 8) === false) {
@@ -51,7 +51,7 @@ export default {
     console.error(error)
     let indicator = _this.$indicator || this.$indicator
     indicator.close()
-    this.showMsg(_this, JSON.stringify(error), 'fr-iconfont icon-info', 'mint-toast-width')
+    this.showMsg(_this, error.message || error.detailMessage, 'fr-iconfont icon-info', 'mint-toast-width')
     if (failedCb && typeof failedCb === 'function') {
       failedCb()
     }

@@ -5,7 +5,7 @@
 }
 .input-style {
   font-size: 0.14rem;
-  line-height: .14rem;
+  line-height: .18rem;
   position: absolute;
   top: 0;
   left: 0;
@@ -44,6 +44,7 @@
   padding: 0.1rem;
   margin-bottom: 0.1rem;
   display: flex;
+  justify-content: space-between;
 }
 .order-item .cl-left {
   width: 80%;
@@ -52,8 +53,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20%;
   border-left: 1px solid #e2e2e2;
+  width: 0.6rem;
 }
 .order-item .row {
   margin-bottom: 0.1rem;
@@ -74,10 +75,23 @@
   align-items: center;
 }
 .order-item .info-wrapper .city {
+  display: block;
+  width: 0.7rem;
+  overflow: hidden;
   font-size: 0.17rem;
+  text-align: center;
+  white-space: nowrap;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
 }
 .order-item .info-wrapper .name {
+  display: block;
+  width: 0.7rem;
+  overflow: hidden;
   text-align: center;
+  white-space: nowrap;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
 }
 .order-item .order-status {
   position: relative;

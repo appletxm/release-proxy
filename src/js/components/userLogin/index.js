@@ -85,6 +85,13 @@ export default {
     },
 
     getPassSuccessCb() {
+      this.$registOrRestSuccess('密码重置成功')
+    },
+    registerSuccessCb() {
+      this.$registOrRestSuccess('注册成功')
+    },
+
+    $registOrRestSuccess(msg) {
       let time,
         pageMethod
 
@@ -92,7 +99,7 @@ export default {
       pageMethod = this.$store.state.loginMethod // 0 page 1 pop dialog
       this.closePopCb()
       this.$toast({
-        message: '密码重置成功',
+        message: msg,
         iconClass: 'fr-iconfont icon-radio-check-s',
         duration: time
       })
@@ -105,23 +112,7 @@ export default {
         this.$loginSuccess()
       }
     },
-    registerSuccessCb() {
-      let time = 3000
-      let pageMethod = this.$store.state.loginMethod // 0 page 1 pop dialog
-      this.closePopCb()
-      this.$toast({
-        message: '注册成功',
-        iconClass: 'fr-iconfont icon-radio-check-s',
-        duration: time
-      })
-      if (pageMethod !== 1) {
-        setTimeout(() => {
-          window.location.href = '/'
-        }, time)
-      } else {
-        this.$loginSuccess()
-      }
-    },
+
     closePopCb() {
       this.isPopShow = false
       this.isShowResetPW = false

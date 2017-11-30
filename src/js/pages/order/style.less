@@ -1,5 +1,3 @@
-@import "../../../css/variables.less";
-@import "../../../css/function.less";
 .order-item {
   font-size: @font-xs;
   font-size: 0.14rem;
@@ -7,6 +5,7 @@
   padding: 0.1rem;
   margin-bottom: 0.1rem;
   display: flex;
+  justify-content:space-between;
   .cl-left {
     width: 80%
   }
@@ -14,8 +13,8 @@
     display: flex;
     align-items: center;
     justify-content:center;
-    width: 20%;
     border-left: 1px solid #e2e2e2;
+    width: 0.6rem;
   }
   .row {
     margin-bottom: 0.1rem;
@@ -37,10 +36,23 @@
   }
   .info-wrapper{
     .city {
-      font-size: 0.17rem;
+      display: block;
+      width: 0.7rem;
+      overflow: hidden;
+      font-size: @font-xs;
+      text-align: center;
+      white-space: nowrap;
+      word-wrap: break-word;
+      text-overflow: ellipsis;
     }
     .name {
+      display: block;
+      width: 0.7rem;
+      overflow: hidden;
       text-align: center;
+      white-space: nowrap;
+      word-wrap: break-word;
+      text-overflow: ellipsis;
     }
   }
   .order-status {
@@ -67,6 +79,7 @@
   .order-btn {
     color: @btnBlue;
     white-space: nowrap;
+    font-size: @font-xs;
   }
 }
     .load-more{

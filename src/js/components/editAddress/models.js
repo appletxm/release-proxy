@@ -65,7 +65,7 @@ export default {
       msg = '请输入正确的' + strPre + '姓名'
       res = false
     } else if (formValidate.phone(_this.phone) === false) {
-      msg = '请输入正确的' + strPre + '联系电话'
+      msg = '请输入正确的' + strPre + '手机号码'
       res = false
     } else if (!_this.province || !_this.city || !_this.district) {
       msg = '请输入正确省、市、区'

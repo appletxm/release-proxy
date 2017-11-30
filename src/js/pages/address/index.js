@@ -31,10 +31,11 @@ export default {
       tabSelectedIndex: 0,
       isEditPopShow: false,
       isPopLoginShow: false,
-      odlDefaultAddress: {},
+      odlDefaultAddress: null,
       beEditAddress: {},
       addressType: 1,
-      needTabFlag: 1
+      needTabFlag: 1,
+      isLoaded: false
     }
   },
 
@@ -45,6 +46,7 @@ export default {
     changeTab(item) {
       this.addressType = item.addressType
       // models.setAddressType(item.addressType)
+      models.setAddressType(item.addressType)
       models.getUserAddress(this, item.addressType)
       document.querySelector('#js-address-list-pannel').scrollTop = 0
     },
@@ -60,7 +62,7 @@ export default {
         models.cancelDefaultAddress(this)
           .then((res) => {
             item.defaultFlag = 0
-            this.odlDefaultAddress = {}
+            this.odlDefaultAddress = null
             this.$indicator.close()
           // models.getUserAddress(this)
           })
@@ -106,9 +108,12 @@ export default {
       this.beEditAddress = {}
     },
 
-    editAddressSuccessCb() {
+    editAddressSuccessCb(needUpdateStorage, item) {
       this.closeEditPage()
       models.getUserAddress(this, this.addressType)
+      if (needUpdateStorage === true) {
+        models.updateStorageAfterEditAddress(this, item)
+      }
     },
 
     $chooseAddress(item) {

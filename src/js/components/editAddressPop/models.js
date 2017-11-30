@@ -48,6 +48,7 @@ export default {
       _this.province = '广东省'
       _this.city = '广州市'
       _this.district = '花都区'
+      _this.areaCode = '440114'
     } else {
       _this.province = item.province
       _this.city = item.city
@@ -79,7 +80,7 @@ export default {
       _this.$closeEditPage()
       if (res) {
         this.showMsg(_this, '地址保存成功', 'fr-iconfont icon-radio-check-s', '')
-        _this.$saveAddressSuccess()
+        _this.$saveAddressSuccess((res.data)[0])
       }
     }).catch((error) => {
       _this.$indicator.close()

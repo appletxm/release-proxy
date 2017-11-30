@@ -18,6 +18,8 @@ export default {
   },
   data() {
     return {
+      isShowIcon: true,
+      isShowTransDetail: false,
       traces: {
         Traces: []
       }
@@ -38,6 +40,8 @@ export default {
       })
       if (phoneItem) {
         return phoneItem.AcceptStation.match(reg)[0]
+      } else {
+        this.isShowIcon = false
       }
     },
     senderCom () {
@@ -59,6 +63,13 @@ export default {
       const res = await models.getOrderLogisticInfo({logisticsCompany: consts['LOGIC_SHPPER_COM_CODE'][0], logisticsCode: this.expressId})
       // this.traces = res.data.Traces
       this.traces = res.data
+
+      if (res.data.Traces && res.data.Traces.length > 0) {
+        this.isShowTransDetail = true
+      } else {
+        this.isShowTransDetail = false
+      }
+
       if (this.detailLoadedCb && typeof this.detailLoadedCb === 'function') {
         this.detailLoadedCb(res)
       }

@@ -18,7 +18,7 @@ export const errorCodeMatch = {
 
 export const errorPopMsg = {
   showTimeoutErrConfrim(errorObj) {
-    Vue.$messagebox.alert(TOKEN_INVALID, '令牌过期提示').then(() => {
+    Vue.$messagebox.alert(TOKEN_INVALID, '登录过期').then(() => {
       let url
       auth.removeAllCookie()
       url = window.location.origin + window.location.pathname + '#/login?timeOut=1'

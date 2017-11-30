@@ -99,7 +99,6 @@ export default {
             })
             models.saveAddress(this)
           } else {
-            console.info('pop user login box')
             models.openLoginPanel(this)
           }
         } else {

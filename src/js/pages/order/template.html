@@ -1,15 +1,14 @@
 <div class="order-list">
   <list-loader :isEmpty="orderList.length <= 0" :isLoading="isLoading" @loadMore="loadMore" :isShowLoadMore="curPage !== 0 && curPage<totalPage"
     marginBottom=".5rem">
-    <div class="empty-info" slot="empty-info">您未有订单哦 &gt;_&lt; !</div>
-
+    <div v-if='isShowTips' class="empty-info" slot="empty-info">您未有订单哦 &gt;_&lt; !</div>
     <div class="order-item" v-for="item in orderList" slot="list-data">
       <div class="cl-left" @click="openDetail(item)">
         <div class="row title-info">
           <div>运单编号：{{item.expressId}}</div>
           <div>下单时间：{{moment(item.orderTime).format('YYYY-MM-DD HH:MM')}}</div>
         </div>
-        <div class="row order">
+        <div class="row">
           <div class="order-info">
             <div class="sender info-wrapper">
               <span class="city">{{item.senderCity}}</span>

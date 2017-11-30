@@ -1,32 +1,41 @@
 const packageOperations = require('./releasePackageOperations')
 const tagOperations = require('./releaseTagOperations')
-const version = process.argv ? (process.argv)[2] : ''
+const distOperations = require('./releaseDistOperations')
+const releaseCodeOperations = require('./releaseCodeOperations')
+const version = process.argv ? (process.argv)[3] : ''
 const ora = require('ora')
 const chalk = require('chalk')
 const spinner = ora('Releasing version: ' + version)
 
+global.branch = 'master'
+
 spinner.start()
 
-packageOperations.updateVersion(version)
+releaseCodeOperations.switchBranch()
   .then((res) => {
-    // console.info('#####', file)
+    if (res === true) {
+      return releaseCodeOperations.updateCode()
+    }
+  })
+  .then((res) => {
+    if (res === true) {
+      return packageOperations.updateVersion(version)
+    }
+  })
+  .then((res) => {
     if (res === true) {
       return tagOperations.createTag(version)
     }
   })
   .then((res) => {
     if (res === true) {
-      spinner.stop()
+      return distOperations.buildDist()
     }
+  })
+  .then((res) => {
+    spinner.stop()
   })
   .catch((err) => {
     console.info(chalk.red(err))
     spinner.stop()
   })
-
-  // tagOperations.createTag(version).then((res) => {
-  //   spinner.stop()
-  // }).catch((err) => {
-  //   console.info(chalk.red(err))
-  //   spinner.stop()
-  // })

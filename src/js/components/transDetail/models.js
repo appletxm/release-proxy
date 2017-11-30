@@ -7,7 +7,7 @@ import consts from 'common/consts'
 
 export default {
   getOrderLogisticInfo(packageObj) {
-    console.log(packageObj)
+    // console.log(packageObj)
     let RequestData = {
       ShipperCode: packageObj.logisticsCompany,
       LogisticCode: packageObj.logisticsCode

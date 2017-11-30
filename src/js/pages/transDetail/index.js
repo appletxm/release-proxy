@@ -1,5 +1,6 @@
 import template from './template.html'
 import TransDetail from 'components/transDetail'
+import * as uiUtils from 'utils/uiUtils'
 
 export default {
   template,
@@ -19,5 +20,8 @@ export default {
       this.$router.back()
     }
   },
-  components: {TransDetail}
+  components: {TransDetail},
+  created () {
+    uiUtils.changeTitle('物流详情')
+  }
 }

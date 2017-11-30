@@ -55,11 +55,11 @@ export default {
     } else if (!_this.reviceAddress || !_this.reviceAddress.name || !_this.reviceAddress.phone || !_this.reviceAddress.address) {
       msg = '请选择/填写收件地址'
       res = false
+    } else if (!_this.productWeight || _this.productWeight > 30) {
+      msg = '请输入物品重量，且重量不能超过30公斤'
+      res = false
     } else if (!_this.productName) {
       msg = '请填写物品名称'
-      res = false
-    } else if (!_this.productWeight || _this.productWeight > 30) {
-      msg = '请输入物品重量，不能超过30公斤'
       res = false
     } else if (!_this.estimateMoney || _this.estimateMoney <= 0) {
       msg = '没获取到预估运费'
@@ -70,11 +70,7 @@ export default {
     }
 
     if (res === false) {
-      _this.$toast({
-        message: msg,
-        duration: 3000,
-        className: 'mint-toast-width'
-      })
+      this.showTipMsgBig(_this, msg, '', 'mint-toast-width', 1500)
     } else {
       _this.productName = _this.productName.replace(/^\s|\s$/g, '')
     }
@@ -84,10 +80,9 @@ export default {
 
   getEstimateMoney(_this) {
     let prams
-
     prams = {
       receiverProvince: _this.reviceAddress ? _this.reviceAddress.province : '',
-      weight: parseInt(_this.productWeight || 0)
+      weight: _this.productWeight
     }
 
     axios.post(apiUrls.getPriceEstimate, prams).then((res) => {
@@ -137,8 +132,9 @@ export default {
 
     axios.post(apiUrls.commitOrder, params)
       .then((res) => {
+        let msg = '提交订单成功！运单编号：' + `${(res.data)[0]['expressId']}` + '，已短信发送，请注意包装完好，我们将尽快上门为您服务'
         _this.$indicator.close()
-        this.showTipMsgBig(_this, '提交订单成功！运单编号：' + `${(res.data)[0]['expressId']}` + '，已短信发送，请注意包装完好，我们将尽快上门为您服务', 'fr-iconfont icon-radio-check', '', 'mint-toast-big-left')
+        this.showTipMsgBig(_this, msg, 'fr-iconfont icon-radio-check', 'mint-toast-big-left', 5000)
         this.resetState(_this)
       })
       .catch((error) => {
@@ -148,12 +144,18 @@ export default {
       })
   },
 
-  showTipMsgBig(_this, msg, icon, className) {
+  showTipMsgBig(_this, msg, icon, className, duration) {
+    let toastPanel = document.querySelector('.mint-toast')
+
+    if (toastPanel) {
+      document.querySelector('body').removeChild(toastPanel)
+    }
+
     _this.$toast({
       message: msg,
       iconClass: icon,
       className: 'mint-toast-big ' + className,
-      duration: 5000
+      duration: duration || 3000
     })
   },
 
@@ -183,19 +185,31 @@ export default {
     if (!_this.productWeight || _this.productWeight <= 0 || _this.productWeight > 30) {
       res = false
       msg = '请将物品重量控制在30公斤以内'
-    } else if (!((/^\d+(\.\d{1})*$/).test(_this.productWeight))) {
-      res = false
+    } else if (!((/^\d+(\.\d{1})?$/).test(_this.productWeight))) {
+      res = true
       msg = '请确认物品重量填是否有误，物品重量控制在30公斤以内，并且重量只能精确到小数点后一位'
+      _this.productWeight = parseInt(_this.productWeight * 10) / 10
     }
 
     if (res === false) {
-      _this.$toast({
-        message: msg,
-        className: 'mint-toast-big',
-        duration: 5000
-      })
+      this.showTipMsgBig(_this, msg, '', 'mint-toast-big', 1500)
     }
-
     return res
+  },
+
+  calculateMoney(_this) {
+    const prodDetailObj = storage.get('prodDetailObj')
+
+    if (prodDetailObj) {
+      _this.productWeight = prodDetailObj.productWeight || null
+      _this.productName = prodDetailObj.productName || ''
+      _this.remark = prodDetailObj.remark || ''
+
+      _this.productWeight = parseFloat(_this.productWeight)
+
+      if (_this.productWeight && _this.productWeight > 0) {
+        _this.$getEstimateMoney()
+      }
+    }
   }
 }

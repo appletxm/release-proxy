@@ -13,7 +13,7 @@ export default {
     if (formValidate.phone(_this.userName) === false) {
       msg = '请输入正确的手机号'
       res = false
-    } else if (formValidate.password(_this.password, 6, 16) === false) {
+    } else if (formValidate.password(_this.password, 6, 15) === false) {
       msg = '请输入正确的密码'
       res = false
     } else if (formValidate.validateCode(_this.validateCode, 4, 8) === false) {
@@ -75,6 +75,9 @@ export default {
   registerFailed(_this, error, failedCb) {
     console.error(error)
     let msg = typeof error === 'string' ? error : error.message
+
+    _this.$indicator.close()
+
     this.showMsg(_this, msg, 'fr-iconfont icon-info', 'mint-toast-width')
     if (failedCb && typeof failedCb === 'function') {
       failedCb()

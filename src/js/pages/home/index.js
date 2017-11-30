@@ -9,7 +9,7 @@ import EditAddress from 'components/editAddress'
 import Dialog from 'components/dialog'
 import UserLogin from 'components/userLogin'
 import PopDark from 'components/popDark'
-import { SET_ADDRESS_TYPE } from 'store/mutationTypes'
+import { SET_ADDRESS_TYPE, SET_CURRENT_MODULE } from 'store/mutationTypes'
 
 export default {
   template: html,
@@ -66,8 +66,13 @@ export default {
     $getEstimateMoney() {
       let res
       this.productWeight = parseFloat(this.productWeight)
+      if (!this.reviceAddress || !this.reviceAddress.province || !this.productWeight) {
+        if (this.estimateMoney !== 0) {
+          this.estimateMoney = 0
+        }
+        return false
+      }
       res = models.validateWeight(this)
-
       if (res === true) {
         models.getEstimateMoney(this)
       }
@@ -154,10 +159,22 @@ export default {
       } else {
         this.reviceAddress = addressInfo
       }
+
+      this.$getEstimateMoney()
     },
 
     closePopDarkCb() {
       this.needShowPopDark = false
+    },
+
+    watchProdDetail() {
+      let prodDetailObj = {
+        productWeight: this.productWeight,
+        productName: this.productName,
+        remark: this.remark
+      }
+      let strDetailObj = JSON.stringify(prodDetailObj)
+      storage.set('prodDetailObj', strDetailObj)
     }
   },
 
@@ -175,12 +192,15 @@ export default {
         this.$triggerAnimate()
       },
       deep: true
-    }
+    },
+    productWeight: 'watchProdDetail',
+    productName: 'watchProdDetail',
+    remark: 'watchProdDetail'
   },
 
   created() {
     uiUtils.changeTitle('寄快递')
-
+    this.$store.commit(SET_CURRENT_MODULE, 'Home')
     models.getAnnouncement(this)
     models.setLoginMethod(this)
   },
@@ -192,5 +212,7 @@ export default {
       this.defaultAddress = storage.getDefaultAddressToStorage()
     }
     this.reviceAddress = storage.getReceiveAddressToStorage()
+
+    models.calculateMoney(this)
   }
 }

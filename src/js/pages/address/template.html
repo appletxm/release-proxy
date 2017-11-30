@@ -2,11 +2,11 @@
 	<address-tab :tab-data="tabList" :change-tab="changeTab" :selected-index="tabSelectedIndex" ref="addressTab"></address-tab>
 
 	<div id="js-address-list-pannel" class="address-list">
-    <div class="emtpy-info" v-if="addressList.length <= 0">
+    <div class="emtpy-info" v-if="addressList.length <= 0 && isLoaded">
       <p v-if="addressType == 1">您未有寄件地址哦 &gt;_&lt; !</p>
       <p v-if="addressType == 2">您未有收件地址哦 &gt;_&lt; !</p>
     </div>
-		<div class="cell" v-for="(item, index) in addressList" :key="index" @click="$chooseAddress(item)">
+		<div v-if='addressList[0].name' class="cell" v-for="(item, index) in addressList" :key="index" @click="$chooseAddress(item)">
 			<h1>
 				<span>{{ item.name }}</span>
 				<span>{{ item.phone }}</span>

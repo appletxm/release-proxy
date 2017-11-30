@@ -20,7 +20,8 @@ export default {
       isShowLogin: false,
       isShowDetail: false,
       showDetailData: {},
-      isLoading: false
+      isLoading: false,
+      isShowTips: false
     }
   },
   async created () {
@@ -65,6 +66,10 @@ export default {
         res.data.list.forEach((item) => {
           this.orderList.push(item)
         })
+        if (this.orderList.length === 0) {
+          this.isShowTips = true
+          console.log(this.isShowTips)
+        }
       } catch (e) {
       }
     },
