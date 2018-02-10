@@ -1,21 +1,10 @@
-<nav :class="['app-nav', $store.state.showNavigator ? 'show' : '']">
-  <div :class="['cell', $store.state.currentModule === 'Home' ? 'nav-actived' : '']" @click="$changeNav('/home', 'Home')">
-    <span class="fr-iconfont icon-direction"></span>
-    <span>寄快递</span>
-  </div>
-  <div :class="['cell', $store.state.currentModule === 'Search' ? 'nav-actived' : '']" @click="$changeNav('/search', 'Search')">
-    <span class="fr-iconfont icon-search-new"></span>
-    <span>查快递</span>
-  </div>
-  <div :class="['cell', $store.state.currentModule === 'MyAll' ? 'nav-actived' : '']" @click="$changeNav('/login', 'MyAll')"
-    v-show="!$store.state.isUserLogin">
-    <span class="fr-iconfont icon-person-simple"></span>
-    <span>登录/注册</span>
-  </div>
-  <div :class="['cell', $store.state.currentModule === 'MyAll' ? 'nav-actived' : '']" @click="openHelpMenu" ref="helpMenu"
-    v-show="$store.state.isUserLogin">
-    <tips-menu :list="helpTipsMenu" v-model="helpTipsMenuShow" :change-module-cb="changeSubModuleCb"></tips-menu>
-    <span class="fr-iconfont icon-person-simple"></span>
-    <span>我的</span>
-  </div>
+<nav class="app-nav">
+  <div class="logo"></div>
+  <ul class="menu">
+    <li v-for="(nav, index) in navList" :class="['cell', $store.state.currentModule === nav.parentModuleName ? 'nav-actived' : '']">
+      <span :class="[nav.icon ? nav.icon : '']" @click="$changeNav(nav, $event)">{{ nav.title }}</span>
+      <b v-if="index < navList.length - 1"></b>
+      <tips-menu v-if="nav.children && nav.children.length > 0" :list="nav.children" v-model="helpTipsMenuShow" :change-module-cb="changeSubModuleCb"></tips-menu>
+    </li>
+  </ul>
 </nav>

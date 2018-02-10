@@ -1,7 +1,7 @@
 import html from './template.html'
 import models from './models'
-import ResetPassWord from 'components/resetPassWord'
-import UserRegister from 'components/userRegister'
+import ResetPassWord from 'components/reset-password'
+import UserRegister from 'components/user-register'
 import Dialog from 'components/dialog'
 
 export default {

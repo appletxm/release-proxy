@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>uploadImage</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .upload-box {
+      background: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="upload-box">
+    <form id="uploadImage" method="post" enctype="multipart/form-data" action="http://10.60.64.132:8089/smartsample/oss/uploadImgFile"
+      target="testIframe">
+      <input type="file" name="file" id="testTile">
+    </form>
+    <iframe onload="iframLoad" id="testIframe" name="testIframe"></iframe>
+  </div>
+  <script>
+    document.querySelector('#testTile').onchange = function () {
+      //console.info(document.getElementById('testTile').innerHTML)
+      document.getElementById('uploadImage').submit()
+    }
+
+    function iframLoad() {
+      //console.info('=====iframe load=====')
+      alert('---------------')
+    }
+  </script>
+
+  <!-- <input id="fileupload" type="file" />
+  <hr />
+  <b>Live Preview</b>
+  <br />
+  <br />
+  <div id="dvPreview">
+  </div>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.8.3.min.js"></script>
+  <script language="javascript" type="text/javascript">
+    $(function () {
+      $("#fileupload").change(function () {
+        $("#dvPreview").html("");
+        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+        if (regex.test($(this).val().toLowerCase())) {
+          if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
+            $("#dvPreview").show();
+            $("#dvPreview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
+          }
+          else {
+            if (typeof (FileReader) != "undefined") {
+              $("#dvPreview").show();
+              $("#dvPreview").append("<img />");
+              var reader = new FileReader();
+              reader.onload = function (e) {
+                $("#dvPreview img").attr("src", e.target.result);
+              }
+              reader.readAsDataURL($(this)[0].files[0]);
+            } else {
+              alert("This browser does not support FileReader.");
+            }
+          }
+        } else {
+          alert("Please upload a valid image file.");
+        }
+      });
+    });
+  </script> -->
+</body>
+
+</html>

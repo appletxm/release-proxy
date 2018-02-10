@@ -5,7 +5,10 @@ module.exports = function (envKeyWord, publicPath) {
   return {
     entry: {
       app: [],
-      vendor: ['axios']
+      login: [],
+      register: [],
+      resetPss: [],
+      vendor: ['axios', path.join(__dirname, '../src/js/utils/compatiable-ie-console.js')]
     },
     output: {
       filename: (envKeyWord === 'development' || envKeyWord === 'mock') ? 'js/[name].js' : 'js/[name].min.[hash:7].js',
@@ -25,9 +28,9 @@ module.exports = function (envKeyWord, publicPath) {
           options: {
             limit: 8192,
             context: 'client',
-            name: (envKeyWord === 'development' || envKeyWord === 'mock') ? '[path][name].[ext]' : 'assets/imgs/[name].[hash:7].[ext]',
-            outputPath: (envKeyWord === 'development' || envKeyWord === 'mock') ? '' : 'assets/imgs/',
-            publicPath: (envKeyWord === 'development' || envKeyWord === 'mock') ? '' : '../'
+            name: (envKeyWord === 'development' || envKeyWord === 'mock') ? '[path][name].[ext]' : 'assets/images/[name].[hash:7].[ext]',
+            outputPath: (envKeyWord === 'development' || envKeyWord === 'mock') ? '' : 'assets/images/',
+            publicPath: (envKeyWord === 'development' || envKeyWord === 'mock') ? '../' : '../'
           }
         },
         {
@@ -38,20 +41,23 @@ module.exports = function (envKeyWord, publicPath) {
             context: 'client',
             name: (envKeyWord === 'development' || envKeyWord === 'mock') ? '[path][name].[ext]' : 'assets/fonts/[name].[hash:7].[ext]',
             outputPath: (envKeyWord === 'development' || envKeyWord === 'mock') ? '' : 'assets/fonts/',
-            publicPath: (envKeyWord === 'development' || envKeyWord === 'mock') ? '' : '../'
+            publicPath: (envKeyWord === 'development' || envKeyWord === 'mock') ? '../' : '../'
           }
         },
         {
           test: /\.less$/,
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
-            use: ['css-loader',{
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true,
-                plugins: () => [autoprefixer({ browsers: ['iOS >= 7', 'Android >= 4.1'] })],
+            use: [
+              'css-loader', {
+                loader: 'postcss-loader',
+                options: {
+                  sourceMap: true,
+                  plugins: () => [autoprefixer({ browsers: ['iOS >= 7', 'Android >= 4.1'] })]
+                }
               },
-            }, 'less-loader']
+              'less-loader'
+            ]
           })
         },
         {

@@ -1,0 +1,22 @@
+{
+    "code": "200",
+    "message": "操作成功",
+    "detailMessage": null,
+    "data": [
+        {
+            "phone": "13333333333",
+            "email": "123@qq.com",
+            "realName": "张三",
+            "nickName": "铁蛋",
+            "gender": "1",
+            "provinceName": "广东省",
+            "provinceCode": "440000",
+            "cityName": "广州市",
+            "cityCode": "440100",
+            "areaName": "花都区",
+            "areaCode": "440114",
+            "addressDetail": "华夏路10号富力中心44楼4402",
+            "invoiceTitle": "广东省广州市富力环球商品贸易港"
+        }
+    ]
+}

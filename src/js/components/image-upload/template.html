@@ -1,0 +1,28 @@
+<div class="component-image-upload">
+  <div class="pic-box">
+    <span class="rf-iconfont icon-account" v-show="!avatarUrl"></span>
+    <img v-show="avatarUrl" :src="avatarUrl" />
+    <input id="js-upload-file" name="file" type="file" v-if="supportFileApi === true" @change="$chooseImg($event)" />
+
+    <iframe id="js-upload-iframe" name="js-upload-iframe" v-if="supportFileApi !== true" @load="$iframeLoad($event)" width="0"
+      height="0" style="display:none;"></iframe>
+    <form id="js-upload-form" v-if="supportFileApi !== true" method="post" enctype="multipart/form-data" :action="uploadTmpImgUrl"
+      target="js-upload-iframe">
+      <input id="js-upload-file" name="file" type="file" @change="$chooseImgIe($event)" />
+    </form>
+  </div>
+
+  <canvas id="js-upload-canvas"></canvas>
+
+  <div class="pre-box" id="js-pre-box" v-show="needShowEditBox">
+    <div class="pre-box-inner">
+      <img id="js-upload-pre" class="pre-img" />
+      <div class="cropper-area"></div>
+      <div id="js-upload-action" class="cropper-mask"></div>
+    </div>
+    <div class="pre-box-footer">
+      <button class="el-button el-button--primary" @click="$confirmCropper">确认</button>
+      <button class="el-button el-button--default" @click="$closeImgEditPanel">取消</button>
+    </div>
+  </div>
+</div>

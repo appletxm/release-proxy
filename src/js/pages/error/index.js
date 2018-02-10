@@ -4,7 +4,7 @@ export default {
   template: html,
   data() {
     return {
-      title: 'this is the error page'
+      title: "can't find page"
     }
   }
 }

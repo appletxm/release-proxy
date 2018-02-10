@@ -27,7 +27,6 @@ const configAxios = {
     axios.interceptors.response.use(function (response) {
       // Do something with response data
       let resData = response.data
-
       if (resData.code === 200 || resData.code === '200') {
         return resData
       } else {

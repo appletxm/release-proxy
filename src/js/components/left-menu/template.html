@@ -1,0 +1,22 @@
+<div class="app-left-menu">
+  <ul>
+    <li v-for="(item, index) in list" :class="[item.hasChild === true ? 'has-child' : '', $isOpened(item) ? 'open' : '']" :key="item.id"
+      :data-parent-id="item.id" @click="$menuCellClick($event, item, index + '')">
+      <span :class="[item.hasChild !== true && item.isActived === true ? 'selected-item' : '']">{{ item.title }}</span>
+
+      <ul :class="['menu-list', $isOpened(item) ? 'menu-list-open' : '']" v-if="item.hasChild === true">
+        <li v-for="(subItem, subIndex) in item.children" :class="[subItem.hasChild === true ? 'has-child' : '', subItem.isActived === true ? 'actived' : '', $isOpened(subItem) ? 'open' : '']"
+          :key="subItem.id" :data-parent-id="subItem.id" @click="$menuCellClick($event, subItem, index + '_' + subIndex)">
+          <span :class="[subItem.hasChild !== true && subItem.isActived === true ? 'selected-item' : '']">{{ subItem.title }}</span>
+
+          <ul :class="['menu-list', $isOpened(subItem) ? 'menu-list-open' : '']" v-if="subItem.hasChild === true">
+            <li v-for="(nodeItem, nodeIndex) in subItem.children" :class="[nodeItem.hasChild === true ? 'has-child' : '', nodeItem.isActived === true ? 'actived' : '', $isOpened(nodeItem) ? 'open' : '']"
+              :key="nodeItem.id" :data-parent-id="nodeItem.id" @click="$menuCellClick($event, nodeItem, index + '_' + subIndex + '_' + nodeIndex)">
+              <span :class="[nodeItem.hasChild !== true && nodeItem.isActived === true ? 'selected-item' : '']">{{ nodeItem.title }}</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

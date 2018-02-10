@@ -1,0 +1,41 @@
+<section class="module-register register-edit-page">
+    <div class="register-box">
+        <p class="ad-pic"></p>
+        <p class="logo"></p>
+        <p class="register-title">注册新账户</p>
+
+        <div class="input-panel">
+            <div class="input-row">
+                <input type="tel" value="" placeholder="请输入手机号" v-model="mobile" maxlength="11" autocomplete="off" @blur='$doCheckMobile'
+                />
+            </div>
+            <div class="input-row">
+                <input type="tel" value="" placeholder="验证码" v-model="verifyCode" maxlength="6" autocomplete="off" />
+                <count-down class="count-down-style" :max-time="maxTimeLength" :mobile="mobile" @get-unique-id='$getUniqueId'></count-down>
+            </div>
+            <div class="input-row">
+                <input type="password" value="" placeholder="6-15位密码" v-model="password" maxlength="15" autocomplete="off" />
+            </div>
+            <div class="input-row">
+                <input type="password" value="" placeholder="确认密码" v-model="confirmPwd" maxlength="15" autocomplete="off" />
+            </div>
+            <div class="input-row">
+                <input type="text" value="" placeholder="姓名" v-model="realName" maxlength="17" autocomplete="off" />
+            </div>
+            <div class="input-row">
+                <input type="text" value="" placeholder="电子邮箱" v-model="email" maxlength="32" autocomplete="off" />
+            </div>
+            <div class="input-row btn-row">
+                <button class="ui-btn-big rf-iconfont icon-add1" @click="$doRegister">
+                    注册
+                </button>
+
+            </div>
+            <div class="input-row two-cell">
+                <span class="btn-user-login">已有账号？
+                    <a href="/login.html">立即登录</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</section>

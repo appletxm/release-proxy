@@ -68,7 +68,7 @@ export default {
     return regexp.test(value)
   },
 
-  password(value, min, max) {
+  password(value, min = 6 , max = 15) {
     let regStr,
       regexp
     regStr = '.'
@@ -90,6 +90,24 @@ export default {
     let regStr,
       regexp
     regStr = '\\d'
+    if (min && max) {
+      regStr += '{' + min + ',' + max + '}'
+    } else if (max) {
+      regStr += '{,' + max + '}'
+    } else if (min) {
+      regStr += '{' + min + ',}'
+    }
+
+    regStr = '^' + regStr + '$'
+    regexp = new RegExp(regStr)
+
+    return regexp.test(value)
+  },
+
+  email(value, min = 1 , max = 32) {
+    let regStr,
+      regexp
+    regStr = '(\\w+)@(\\w+)\\.(\\w+)'
     if (min && max) {
       regStr += '{' + min + ',' + max + '}'
     } else if (max) {

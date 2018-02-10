@@ -15,3 +15,5 @@ deploy/
 *.ntvs*
 *.njsproj
 *.sln
+
+uploads/

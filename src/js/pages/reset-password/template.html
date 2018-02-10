@@ -1,0 +1,31 @@
+<div class="reset-password-login single-edit-page-reset-password">
+    <div class="reset-password-box">
+      <div class="title">找回密码</div>
+        <p class="ad-pic"></p>
+        <p class="logo"></p>
+        <div class="input-panel">
+          <div class="input-row input-selected">
+            <input type="tel" value="" placeholder="请输入手机号" v-model="mobile" maxlength="11" autocomplete="off" />
+          </div>
+    
+          <div class="input-row">
+            <input type="tel" value="" placeholder="验证码" maxlength="16" autocomplete="off" v-model='verifyCode'/>
+            <count-down :mobile="mobile" :max-time="maxTimeLength" @get-unique-id='$getUniqueId'></count-down>
+          </div>
+
+          <div class="input-row">
+            <input type="password" value="" placeholder="6-15位密码"v-model='password' maxlength="16" autocomplete="off" />
+          </div>
+
+          <div class="input-row">
+            <input type="password" value="" placeholder="确认密码"v-model='confirmPwd'maxlength="16" autocomplete="off" />
+          </div>
+
+          <div class="input-row btn-row">
+            <button class="ui-btn-big" @click='$doGetPassBack'>
+              提交
+            </button>
+          </div>
+    
+      </div>
+</div>

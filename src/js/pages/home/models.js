@@ -1,8 +1,9 @@
 /* global moment */
 import axios from 'axios'
 import apiUrls from 'common/apiUrls'
-import { SET_USER_DEFAULT_ADDRESS, SET_LOGIN_METHOD } from 'store/mutationTypes'
+import { SET_USER_DEFAULT_ADDRESS, SET_LOGIN_METHOD, SET_USER_LOGIN_STATUS } from 'store/mutation-types'
 import storage from 'common/storage'
+import auth from 'common/auth'
 
 export default {
   setLoginMethod(_this) {
@@ -10,7 +11,9 @@ export default {
   },
 
   getDefaultAddress(_this) {
-    let params
+    let params, defaultAddress
+
+    defaultAddress = storage.getDefaultAddressToStorage()
 
     params = {
       userId: _this.userInfo ? storage.getUserId(_this.userInfo.name) : '',
@@ -19,16 +22,19 @@ export default {
 
     axios.post(apiUrls.getDefaultAddress, params)
       .then((res) => {
-        _this.$store.commit(SET_USER_DEFAULT_ADDRESS, res.data && res.data.length > 0 ? (res.data)[0][0] : {})
-        if (!storage.getDefaultAddressToStorage() && (res.data)[0].length !== 0) {
-          _this.defaultAddress = (res.data)[0][0]
-          storage.setDefaultAddressToStorage((res.data)[0][0])
+        _this.$store.commit(SET_USER_DEFAULT_ADDRESS, res.data && res.data.length > 0 ? (res.data)[0] : {})
+        if (!defaultAddress && res.data.length !== 0) {
+          _this.defaultAddress = (res.data)[0]
+          storage.setDefaultAddressToStorage((res.data)[0])
         } else {
-          _this.defaultAddress = storage.getDefaultAddressToStorage()
+          _this.defaultAddress = defaultAddress
         }
       })
       .catch((error) => {
         console.error(error)
+        if (error.code === '-1' || error.code === -1) {
+          this.doUserLogout(_this)
+        }
       })
   },
 
@@ -81,7 +87,7 @@ export default {
   getEstimateMoney(_this) {
     let prams
     prams = {
-      receiverProvince: _this.reviceAddress ? _this.reviceAddress.province : '',
+      receiverProvince: _this.reviceAddress ? _this.reviceAddress.provinceName : '',
       weight: _this.productWeight
     }
 
@@ -108,17 +114,17 @@ export default {
     params = {
       senderName: sendAddress.name,
       senderPhone: sendAddress.phone,
-      senderProvince: sendAddress.province,
-      senderCity: sendAddress.city,
-      senderDistrict: sendAddress.district,
+      senderProvince: sendAddress.provinceName,
+      senderCity: sendAddress.cityName,
+      senderDistrict: sendAddress.areaName,
       senderAddress: sendAddress.address,
       senderAreaCode: sendAddress.areaCode,
 
       receiverName: receiveAddress.name,
       receiverPhone: receiveAddress.phone,
-      receiverProvince: receiveAddress.province,
-      receiverCity: receiveAddress.city,
-      receiverDistrict: receiveAddress.district,
+      receiverProvince: receiveAddress.provinceName,
+      receiverCity: receiveAddress.cityName,
+      receiverDistrict: receiveAddress.areaName,
       receiverAddress: receiveAddress.address,
       receiverAreaCode: receiveAddress.areaCode,
 
@@ -211,5 +217,11 @@ export default {
         _this.$getEstimateMoney()
       }
     }
+  },
+
+  doUserLogout(_this) {
+    storage.loginOutRemoveAll()
+    auth.removeAllCookie()
+    _this.$store.commit(SET_USER_LOGIN_STATUS, auth.checkUserLogin())
   }
 }

@@ -1,0 +1,94 @@
+.address-wrap{
+    width: 3.3rem;
+    box-shadow: 0 0 .05rem rgba(0, 0, 0, 0.2);
+    background: @white;
+    border: 1px solid @light-gray;
+    position: absolute;
+    left: .69rem;
+    z-index: 1;
+    // height: 300px;
+
+    .address-selected-tab {
+        border: 1px solid #ccc;
+        border-right: 0;
+        border-top: 0;
+        border-left: 0;
+        background: #f0f0f0;
+        height: .37rem;
+        margin:0;
+        padding:0;
+        
+        li{
+            list-style: none;
+            float: left;
+                font: 400 .12rem/1.6 arial, sans-serif;
+                width: .74rem;
+                height: .37rem;
+                float: left;
+                color: #4D4D4D;
+                border-left: 1px solid #ccc;
+                border-bottom: 1px solid transparent;
+                text-align: center;
+                line-height: .37rem;
+                text-decoration: none;
+                // position: relative;
+                // left: -1px;
+                // display: inline;
+                // padding: 8px 20px;
+                // +width: 34px;
+                // +height: 21px;
+                // border-right: 0;
+            }
+                li:hover {
+                cursor: pointer;
+                color: #ed6900;
+            }
+                li.active {
+                background: #fff;
+                border-bottom: 1px solid #fff;
+                color: #ed6900;
+            }
+            
+        }
+    .addr-selected-view {
+        dl {
+            padding: 0;
+            margin: 0;
+
+            dd{
+                margin: 0;
+                font-size: @font-xs;
+                font-weight: normal;
+                padding: .05rem .1rem;
+                line-height: .36rem;
+                
+                a{
+                    cursor: pointer;
+                    display: inline-block;
+                    outline: 0;
+                    text-decoration: none;
+                    white-space: nowrap;
+                    color: @black-dark;
+                    padding: 0 .05rem;
+                }
+                a:hover {
+                    background-color: #FEE7D5;
+                    color: #ed6900;
+                    border-radius: 2px;
+                }
+
+                a.active{
+                    background-color: #ed6900;
+                    color: #fff;
+                    border-radius: 2px;
+                }
+                a.itemActive{
+                    background-color: #ed6900;
+                    color: #fff;
+                    border-radius: 2px;
+                }
+            }
+        }
+
+    }
+}

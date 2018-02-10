@@ -1,69 +1,66 @@
+/* global Vue */
+import '../../../css/index.less'
 import html from './template.html'
-import * as uiUtils from 'utils/uiUtils'
-import { SET_LOGIN_METHOD, SET_CURRENT_MODULE, SET_USER_LOGIN_STATUS } from 'store/mutationTypes'
-import Tab from 'components/tab'
-import UserLogin from 'components/userLogin'
-import UserRegister from 'components/userRegister'
+import uiAdapt from 'utils/mobileAdapt'
+import axioDecorate from 'common/axioDecorate'
+import models from './models'
 
-const tabData = [
-  {
-    id: 0,
-    name: '登 录'
-  },
-  {
-    id: 1,
-    name: '注 册'
-  }
-]
+uiAdapt(window, document, 750)
+axioDecorate.decorate()
 
-export default {
+const loginPage = new Vue({
   template: html,
   data() {
     return {
-      title: "i'm help page",
-      tabList: tabData,
-      tabSelectedIndex: 0,
-      tabCurrentItem: tabData[0],
-      loginShow: true,
-      registerShow: true,
-      isPopShow: false
+      password: '',
+      mobile: '',
+      loadingObj: null,
+      msgObj: null
     }
   },
   methods: {
-    changeTab(item) {
-      this.tabCurrentItem = JSON.parse(JSON.stringify(item))
-    },
-    closeLoginCb() {},
-    loginSuccessCb() {
-      // window.location.href = '/'
-      this.$router.push({path: '/'})
-    },
-    closeRegisterCb() {},
-    registerSuccessCb() {
-      // window.location.href = '/'
-      this.$router.push({path: '/'})
-    }
-  },
-  components: {
-    'login-tab': Tab,
-    'user-login': UserLogin,
-    'user-register': UserRegister
-  },
-  created() {
-    uiUtils.changeTitle('用户登录/注册')
-    this.$store.commit(SET_LOGIN_METHOD, 0)
-    this.$store.commit(SET_CURRENT_MODULE, 'MyAll')
-  },
-  mounted() {
-    let url, timeOut, matched
+    $doLogin() {
+      let result = models.doValidate(this)
 
-    matched = window.location.hash.match(/\?(.+)/)
-    if (matched && matched.length > 0) {
-      url = matched[0]
-      timeOut = uiUtils.getQueryString('timeOut', url)
-      if (timeOut && timeOut === '1') {
-        this.$store.commit(SET_USER_LOGIN_STATUS, false)
+      if (result.res === true) {
+        this.$showLoading()
+        models.doLogin(this)
+      } else {
+        this.$showMsg('warning', result.msg)
+      }
+    },
+
+    $showMsg(type, msg) {
+      this.msgObj = this.$message({
+        message: msg,
+        showClose: true,
+        type: type,
+        duration: 2000
+      })
+    },
+
+    $closeMsg() {
+      if (this.msgObj) {
+        this.msgObj.close()
+      }
+    },
+
+    $showLoading() {
+      this.loadingObj = this.$loading({
+        lock: true,
+        spinner: 'el-icon-loading'
+      })
+    },
+
+    $closeLoading() {
+      if (this.loadingObj) {
+        this.loadingObj.close()
       }
     }
-  }
-}
+  },
+  components: {},
+  created() {},
+  mounted() {}
+})
+
+loginPage.$mount('#app')

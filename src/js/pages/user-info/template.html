@@ -1,0 +1,49 @@
+<div class="module-user-info">
+  <div class="user-head-img left-2-word">
+    <label class="label-perline">头像：</label>
+    <image-upload :get-image-cb="getImageCb" :avatar-url="avatarUrl"></image-upload>
+    <label class="head-img-remark">（点击头像可以选择你要上传的图片）</label>
+  </div>
+  <div class="user-info-row left-3-word">
+    <label class="label-perline">手机号：</label>
+    <label v-text="phone"></label>
+  </div>
+  <div class="user-info-row left-4-word">
+    <label class="label-perline">电子邮箱：</label>
+    <input class="user-info-input" type="text" placeholder="" v-model="email" maxlength="32" />
+  </div>
+  <div class="user-info-row left-2-word">
+    <label class="label-perline">姓名：</label>
+    <input class="user-info-input" type="text" placeholder="" v-model="realName" maxlength="17" />
+  </div>
+  <div class="user-info-row left-2-word">
+    <label class="label-perline">昵称：</label>
+    <input class="user-info-input" type="text" placeholder="" v-model="nickName" maxlength="20" />
+  </div>
+  <div class="user-info-row left-2-word">
+    <label class="label-perline">性别：</label>
+    <el-radio-group v-model="gender">
+      <el-radio :label="1">男</el-radio>
+      <el-radio :label="2">女</el-radio>
+    </el-radio-group>
+  </div>
+  <div class="user-info-row left-2-word">
+    <label class="label-perline">地址：</label>
+    <input class="user-info-input" type="text" placeholder="省市区" v-model="address" @click="$addrWrapShow" readonly maxlength="20"
+    />
+    <address-seleted v-show='addrSelectedShow' class="addr-sele-box" id="js-address-box" @addr-selected='addrSelected' @addr-wrap-hide='addrWrapHide'
+      :clear-content='clearDistrict'></address-seleted>
+  </div>
+  <div class="user-info-row left-0-word address-detail-style">
+    <textarea type="text" placeholder="请输入详细地址" v-model="addressDetail" maxlength="40"></textarea>
+  </div>
+  <div class="user-info-row left-4-word">
+    <label class="label-perline">开票抬头：</label>
+    <input class="user-info-input" type="text" placeholder="" v-model="invoiceTitle" maxlength="40" />
+  </div>
+  <div class="user-info-row btn-row left-0-word">
+    <button class="ui-btn-big" @click="$doSubmit">
+      提交
+    </button>
+  </div>
+</div>

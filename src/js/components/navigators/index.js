@@ -1,33 +1,11 @@
 import html from './template.html'
-import TipsMenu from '../tipsMenu'
+import TipsMenu from '../tips-menu'
 import auth from 'common/auth'
-import storage from 'common/storage'
-import { SET_CURRENT_MODULE, SET_USER_LOGIN_STATUS } from 'store/mutationTypes'
-
-const subMenuList = [
-  {
-    id: 'address',
-    title: '我的地址',
-    isShow: true,
-    path: '/address/1',
-    parentModuleName: 'MyAll'
-  },
-  {
-    id: 'order',
-    title: '我的订单',
-    isShow: true,
-    path: '/order',
-    parentModuleName: 'MyAll'
-  },
-  {
-    id: 'loginout',
-    title: '退出登录',
-    isShow: true,
-    path: '/login',
-    parentModuleName: 'MyAll',
-    event: 'loginOut'
-  }
-]
+import { storage } from 'common/storage'
+import { SET_USER_LOGIN_STATUS } from 'store/mutation-types'
+import models from './models'
+import axios from 'axios'
+import apiUrls from 'common/apiUrls'
 
 export default {
   template: html,
@@ -35,8 +13,8 @@ export default {
     return {
       selectedIndex: 0,
       helpTipsMenuShow: false,
-      helpTipsMenu: subMenuList,
-      currentModule: 'Home'
+      currentModule: '',
+      navList: []
     }
   },
   methods: {
@@ -45,30 +23,44 @@ export default {
     },
 
     changeSubModuleCb(item) {
-      if (item.id === 'address') {
-        this.$gotoAddressPage()
-      }
       if (item.id === 'loginout') {
         this.$loginOut()
+      } else {
+        this.$changeNav(item)
+        this.helpTipsMenuShow = false
       }
-
-      this.$changeNav({path: item.path}, item.parentModuleName)
-      this.helpTipsMenuShow = false
     },
 
-    $changeNav(path, moduleName) {
-      this.$store.commit(SET_CURRENT_MODULE, moduleName)
-      this.$router.push(path)
+    $changeNav(nav, event) {
+      let {isOusideLink, path, parentModuleName, menuItemId, children} = nav
+
+      if (event) {
+        event.stopPropagation()
+      }
+
+      if (children && children.length > 0) {
+        this.helpTipsMenuShow = true
+        return false
+      }
+
+      if (isOusideLink === true) {
+        window.location.href = path
+        return path
+      }
+      models.openNavLink(this, parentModuleName, menuItemId + '_' + nav.title + '_' + 'nav', path)
     },
 
     $loginOut() {
-      storage.loginOutRemoveAll()
-      auth.removeAllCookie()
-      this.$store.commit(SET_USER_LOGIN_STATUS, auth.checkUserLogin())
-    },
-
-    $gotoAddressPage() {
-      storage.setNeedAddressTabFlag(1)
+      axios.post(apiUrls.userLogOut)
+        .then((res) => {
+          storage.loginOutRemoveAll()
+          auth.removeAllCookie()
+          this.$store.commit(SET_USER_LOGIN_STATUS, auth.checkUserLogin())
+          window.location.href = '/login.html'
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   },
 
@@ -77,14 +69,16 @@ export default {
   },
 
   created() {
-    this.$store.commit(SET_USER_LOGIN_STATUS, auth.checkUserLogin())
+    let navList = models.getNavData()
+    navList = models.decorateNavData(navList)
+    this.navList = navList
   },
 
   mounted() {
     document.addEventListener('click', (e) => {
-      if (!this.$refs['helpMenu'].contains(e.target)) {
-        this.helpTipsMenuShow = false
-      }
+      this.helpTipsMenuShow = false
     })
+
+    models.urlMatchNavItem(this)
   }
 }

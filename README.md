@@ -1,7 +1,7 @@
 ## 富运通移动端
 
 > 1. javascript 技术栈vuejs + vue-router
-> 2. UI采用是的mint.JS
+> 2. UI采用是的element-ui
 > 3. 预处理器less
 
 ## 目录结构
@@ -41,6 +41,18 @@ npm run mock
 # check the javascript coding unify and illegal
 npm run eslint
 
+# create a package for production
+npm run build
+
+# create a package for pre-production
+npm run build-for-pre
+
+# create a package for test env
+npm run build-for-test
+
+# create a package and tag for production
+npm run release
+
 ```
 
 ## 本地调试
@@ -54,20 +66,12 @@ npm run eslint
 ``` code
 server {
         listen       80;
-        server_name  rf.express.local.com;
-        access_log  logs/rf.access.log  main;
+        server_name  rf.smart-sampling.local.com;
+        access_log  logs/rf.smart-sampling.access.log  main;
 
 		location / {
-      proxy_pass   http://127.0.0.1:8089;
+      proxy_pass   http://127.0.0.1:8079;
         index  index.html index.htm;
-      }
-  
-      location /rf_express {
-        proxy_pass http://10.60.65.181:8080/rf_express;
-      }
-  
-      location /kdn {
-        proxy_pass http://yd.test.rfgmc.com/kdn;
       }
       
       location /rfucenter {

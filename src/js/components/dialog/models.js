@@ -1,6 +1,6 @@
 import axios from 'axios'
 import apiUrls from 'common/apiUrls'
-import { SET_USER_DEFAULT_ADDRESS, SET_USER_RECEIVE_DEFAULT_ADDRESS } from 'store/mutationTypes'
+import { SET_USER_DEFAULT_ADDRESS, SET_USER_RECEIVE_DEFAULT_ADDRESS } from 'store/mutation-types'
 import formValidate from 'utils/formValidate'
 
 export default {

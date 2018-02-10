@@ -1,8 +1,14 @@
 <div class="my-app">
-	<!-- <h1>1234567888888
-		<span class="iconfont icon-shizhongfill"></span>
-	</h1>
-	<h2>{{title}}</h2> -->
-	<router-view></router-view>
-	<navigator></navigator>
+	<!-- <navigator></navigator>
+	<left-menu></left-menu>
+	<app-bread></app-bread>
+	<div class="app-frame">
+		<router-view></router-view>
+	</div> -->
+
+	<iframe id="js-upload-iframe" name="js-upload-iframe" @load="$iframeLoad($event)" width="0" height="0" style="display:none;"></iframe>
+	<form id="js-upload-form" method="post" enctype="multipart/form-data" action="uploadFile" target="js-upload-iframe">
+		<input id="js-upload-file" name="file" type="file" @change="$chooseImgIe($event)" style="height: .4rem;" />
+	</form>
+
 </div>

@@ -1,0 +1,58 @@
+.el-loading-mask{
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.el-loading-spinner{
+  color: @white;
+
+  .el-icon-loading{
+    color: @white;
+
+    &:before{
+      font-size: @font-xl;
+    }
+  }
+
+  .el-loading-text{
+    color: @white;
+  }
+}
+
+.el-table {
+  th>.cell{
+    font-family: @font-family;
+    color: @black;
+  }
+  .cell{
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+
+.el-pagination{
+  text-align: center;
+  padding-top: .2rem;
+  .el-pager{
+    li{
+      font-size: @font-xs;
+      font-weight: normal;
+    }
+  }
+}
+
+.el-form--inline {
+  .el-form-item{
+    width: 45%;
+    margin-bottom: .1rem;
+  }
+
+  .el-form-item__label{
+    width: .8rem;
+    color: @black-light-l;
+  }
+
+  .el-form-item__content{
+    color: @black;
+  }
+}
+

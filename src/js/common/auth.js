@@ -1,6 +1,6 @@
 import * as uiUtils from 'utils/uiUtils'
 
-const FR_EXPRESS_ACCESS_TOKEN = 'loginToken'
+const ACCESS_TOKEN = 'loginToken'
 
 export default {
   checkUserLogin() {
@@ -10,7 +10,7 @@ export default {
     hasToken = false
     // getLoginUserInfo = false
 
-    if (uiUtils.uiCookie.get(FR_EXPRESS_ACCESS_TOKEN)) {
+    if (uiUtils.uiCookie.get(ACCESS_TOKEN)) {
       hasToken = true
     }
 
@@ -25,14 +25,15 @@ export default {
     let cookieTime
 
     cookieTime = 1000 * 60 * 60 * 24
-    uiUtils.uiCookie.set(FR_EXPRESS_ACCESS_TOKEN, value, cookieTime)
+    uiUtils.uiCookie.set(ACCESS_TOKEN, value, cookieTime)
   },
 
   getTokenFromCookie() {
-    return uiUtils.uiCookie.get(FR_EXPRESS_ACCESS_TOKEN)
+    let token = uiUtils.uiCookie.get(ACCESS_TOKEN)
+    return token
   },
 
   removeAllCookie() {
-    uiUtils.uiCookie.delete(FR_EXPRESS_ACCESS_TOKEN)
+    uiUtils.uiCookie.delete(ACCESS_TOKEN)
   }
 }

@@ -1,0 +1,108 @@
+
+@register-panel-height: 5.6rem;
+@register-panel-width: 10rem;
+@blue-belt-height: .8rem;
+@input-row-height: .5rem;
+
+.module-register{
+  background: @white;
+  height: @register-panel-height;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  min-width: @register-panel-width;
+  top: 50%;
+  margin: -@register-panel-height/2 0;
+  overflow: auto;
+
+  .logo{
+    width: 2.68rem;
+    height: .95rem;
+    background: url("../../../assets/images/logo-m.png") no-repeat;
+    background-size: 100% 100%;
+    top: 1.62rem;
+    left: 4.73rem;
+    position: absolute;
+  }
+
+  .register-box{
+    width: @register-panel-width;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin: 0 -@register-panel-width/2;
+    height: 100%;
+  }
+}
+
+.register-edit-page{
+  .ad-pic{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 9.11rem;
+    height: 5.55rem;
+    background: url("../../../assets/images/ad-1.png") no-repeat bottom right;
+    background-size: 9.11rem;
+  }
+  
+  .register-title {
+    position: absolute;
+    top: .4rem;
+    color: #2F88AE;
+    font-size: @font-xl
+  }
+
+  .input-panel {
+    position: absolute;
+    top: .9rem;
+    width: 4.4rem;
+
+    .input-row{
+      height: @input-row-height;
+      position: relative;
+      border-bottom: 1px solid @gray;
+      color: @black-middle;
+      font-size: @font-xs;
+      margin-bottom: .05rem;
+  
+      input{
+        // text-indent: .24rem;
+        padding: 0 .08rem;
+        width: 100%;
+      }
+
+      .count-down-style {
+        z-index: 10;
+        position: relative;
+        float: right;
+        width: .7rem;
+      }
+    }
+
+    .btn-row{
+      height: 1rem;
+      border: 0;
+  
+      .ui-btn-big{
+        top: 50%;
+        height: @btn-big-height;
+        font-size: @font-s;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .two-cell {
+      height: .2rem;
+      border: 0;
+      margin-top: -.15rem;
+
+      .btn-user-login {
+        float: left;
+      }
+    }
+  }
+}

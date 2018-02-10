@@ -1,35 +1,50 @@
 .app-nav{
-  display: none;
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   width: 100%;
-  height: @foot-height;
-  background-color: @white;
+  height: @nav-height;
+  background-color: @black-dark;
+  color: @white;
   z-index: 10;
-  //overflow: hidden;
-  border-top: 1px solid @gray-dark;
 
-  &.show{
-    display: block
+  .logo{
+    display: inline-block;
+    width: 1.05rem;
+    height: .37rem;
+    background: url("../../../assets/images/logo.png") no-repeat;
+    background-size: 100% 100%;
+    margin: .07rem 0 0 .05rem;
+  }
+
+  .menu{
+    position: absolute;
+    top:0;
+    left: 1.2rem;
+    height: 100%;
+    right: 0;
+    display: block;
+    text-align: right;
   }
 
   .cell{
-    width: 33.33333%;
     text-decoration: none;
     color: @black-middle;
-    display: block;
-    float: left;
     height: 100%;
     position: relative;
+    display: inline-block;
+    line-height: @nav-height;
+    color: @white;
+    padding: 0 @con-gap;
+    cursor: pointer;
 
     &:before{
       content: "";
       position: absolute;
-      bottom: 0;
+      bottom: 1px;
       left: 50%;
       margin-left: 0;
-      background: @green;
+      background: @orange;
       width: 0;
       height: 6px;
       .transition(all 0.3s ease-in-out);
@@ -38,19 +53,25 @@
     span{
       display: block;
       text-align: center;
-      font-size: @font-xxs;
+      font-size: @font-xs;
 
-      &:nth-of-type(1){
-        margin-top: .07rem;
-      }
-
-      &.fr-iconfont{
-        font-size: @font-xl;
+      &:before{
+        font-size: @font-xs;
       }
     }
 
+    b{
+      position: absolute;
+      top: @nav-height/4;
+      bottom: @nav-height/4;
+      right: 0; 
+      width: 1px;
+      display: block;
+      background: @black-middle;
+    }
+
     &.nav-actived{
-      color: @green-dark;
+      color: @orange;
 
       &:before{
         content: "";

@@ -1,0 +1,75 @@
+.reset-password-login{
+    background: @white;
+    height: @login-panel-height;
+    position: fixed;
+    left: 0;
+    width: 100%;
+    top: 50%;
+    margin: -@login-panel-height/2 0;
+
+    .logo{
+        background: url("../../../assets/images/logo-m.png") no-repeat;
+        width: 2.7rem;
+        height: 1rem;
+        top: 2.4rem;
+        position: absolute;
+        right: -0.1rem;
+      }
+
+      .reset-password-box{
+        width: @login-panel-width;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin: 0 -@login-panel-width/2;
+        height: 100%;
+      }
+    }
+    
+    .single-edit-page-reset-password{
+      .title{
+        font-family: '微软雅黑';
+        font-size: 22px;
+        color:@blue;
+        position: absolute;
+        top: .5rem;
+      }
+      .ad-pic{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 9.11rem;
+        height: 5.55rem;
+        background: url("../../../assets/images/ad-2.png") no-repeat bottom right;
+        background-size: 8.02rem;
+      }
+
+    .input-panel{
+      position: absolute;
+      width: 4.4rem;
+      top: 1.3rem + .15rem;
+
+    .input-row{
+      height: @input-row-height;
+      position: relative;
+      border-bottom: 1px solid @gray;
+      color: @black-middle;
+      font-size: @font-xs;
+      
+      input{
+        width: 100%;
+      }
+
+    }
+
+    .btn-row{
+      height: 1rem + 0.35rem;
+      border: 0;
+  
+      .ui-btn-big{
+        top: 50%;
+        height: @btn-big-height;
+      }
+    }
+  }
+}

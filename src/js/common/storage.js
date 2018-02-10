@@ -1,17 +1,20 @@
 /* global localStorage */
-const FR_EXPRESS_USER_INFO = 'fr_express_user_info'
-const DEFAULT_ADDRESS = 'defaultAddress'
-const RECEIVE_ADDRESS = 'receiveAddress'
-const ADDRESS_TYPE = 'address_type'
-const ADDRESS_PAGE_NEED_TAB = 'address_type_need_tab'
+export const USER_INFO = 'user_info'
+export const CURRENT_MODULE = 'currentModule'
+export const CURRENT_MENU_ID = 'currentMenuId'
 
-export default {
+export const storage = {
   setUserInfoToStorage(value) {
-    localStorage.setItem(FR_EXPRESS_USER_INFO, encodeURIComponent(JSON.stringify(value)))
+    localStorage.setItem(USER_INFO, encodeURIComponent(JSON.stringify(value)))
   },
 
   getUserInfoFromStorage() {
-    return JSON.parse(decodeURIComponent(localStorage.getItem(FR_EXPRESS_USER_INFO)))
+    let userInfo = localStorage.getItem(USER_INFO)
+    try {
+      return JSON.parse(decodeURIComponent(userInfo))
+    } catch (e) {
+      return userInfo
+    }
   },
 
   getUserId(userIdFromStore) {
@@ -27,50 +30,26 @@ export default {
     return userIdFromStore
   },
 
-  setAddresTypeToStorage(type) {
-    localStorage.setItem(ADDRESS_TYPE, type)
-  },
-
-  getAddresTypeToStorage() {
-    return parseInt(localStorage.getItem(ADDRESS_TYPE), 10)
-  },
-
-  setDefaultAddressToStorage(defaultAddress) {
-    localStorage.setItem(DEFAULT_ADDRESS, encodeURIComponent(JSON.stringify(defaultAddress)))
-  },
-
-  getDefaultAddressToStorage() {
-    return JSON.parse(decodeURIComponent(localStorage.getItem(DEFAULT_ADDRESS)))
-  },
-
-  setReceiveAddressToStorage(receiveAddress) {
-    localStorage.setItem(RECEIVE_ADDRESS, encodeURIComponent(JSON.stringify(receiveAddress)))
-  },
-
-  getReceiveAddressToStorage() {
-    return JSON.parse(decodeURIComponent(localStorage.getItem(RECEIVE_ADDRESS)))
-  },
-
-  setNeedAddressTabFlag(value) {
-    localStorage.setItem(ADDRESS_PAGE_NEED_TAB, value)
-  },
-
-  getNeedAddressTabFlag() {
-    return parseInt(localStorage.getItem(ADDRESS_PAGE_NEED_TAB), 10)
-  },
-
   loginOutRemoveAll() {
     localStorage.clear()
   },
+
   get(key) {
-    let res = localStorage.getItem(key)
+    let res = decodeURIComponent(localStorage.getItem(key))
     try {
       return JSON.parse(res)
     } catch (e) {
       return res
     }
   },
-  set(key, item) {
-    localStorage.setItem(key, item)
+  set(key, value) {
+    let objKeys = Object.keys(value)
+    let str = value
+
+    if (objKeys.length > 0) {
+      str = encodeURIComponent(JSON.stringify(value))
+    }
+
+    localStorage.setItem(key, str)
   }
 }

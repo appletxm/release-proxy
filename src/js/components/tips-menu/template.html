@@ -1,0 +1,4 @@
+<div class="tips-menu" v-show="isShow">
+  <div v-if="item.isShow" v-for="(item, index) in list" @click="$gotoModule(item, $event)" v-show="item.isShow" class="item" >{{item.title}}</div>
+  <div class="tri-icon"></div>
+</div>

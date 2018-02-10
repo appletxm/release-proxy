@@ -1,0 +1,13 @@
+<div class="address-wrap">
+    <ul class="address-selected-tab">
+        <li v-for='(tab,index) in tabs' :class="{active:index === num }" @click='tabChange(index)'>{{tab.type}}</li>
+    </ul>
+    <div class='addr-selected-view'>
+        <dl>
+            <dd v-for='(tab,index) in tabs' v-show='index === num'>
+                <a v-for='(tabContent,i) in tabs[index].content' :id='tabContent.label' :class='{active:selectedActive[index]  === tabContent}'
+                    @click='addrSelected(tabContent.label,tabContent.value,index,i),selected(tabContent, index)'>{{tabContent.value}}</a>
+            </dd>
+        </dl>
+    </div>
+</div>

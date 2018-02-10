@@ -1,0 +1,6 @@
+<div class="component-count-down">
+  <button class="valid-code" :disabled="isDisabled" @click="$getCode" v-model="code">
+    <span v-show="isDisabled">
+      <span>{{countDownNo}}&nbsp;</span>s</span> {{ isDisabled ? '' : '发送验证码' }}
+  </button>
+</div>

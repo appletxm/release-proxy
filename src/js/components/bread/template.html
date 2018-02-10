@@ -1,0 +1,7 @@
+<div class="app-bread">
+  <span>当前页面：</span>
+  <p v-for="(item, index) in breadList">
+    <b>{{ item.title }}</b>
+    <i v-if="index < breadList.length - 1"> &gt; </i>
+  </p>
+</div>

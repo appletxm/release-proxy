@@ -1,0 +1,6 @@
+{
+  "code": "200",
+  "message": "图片上传成功",
+  "detailMessage": null,
+  "data": "http://127.0.0.1:8079/dist/assets/images/ad-0.png"
+}

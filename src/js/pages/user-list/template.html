@@ -1,0 +1,22 @@
+<div class="module-user-list">
+  <el-table :data="userList" style="width: 100%" :default-sort="{prop: 'registerTimeFormat', order: 'descending'}">
+
+    <el-table-column type="expand">
+      <template scope="props">
+        <el-form label-position="left" inline class="demo-table-expand">
+          <el-form-item v-for="item in columns" :label="item.label">
+            <img class="avatar-icon" v-if="item.prop === 'avatarUrl' && props.row[item.prop]" :src="props.row[item.prop]" />
+            <span v-else>{{ props.row[item.prop] }}</span>
+          </el-form-item>
+        </el-form>
+      </template>
+    </el-table-column>
+
+    <el-table-column v-for="item in columns" v-if="item.hidden !== true" :prop="item.prop" :label="item.label" :width="item.width"
+      :sortable="item.sortable">
+    </el-table-column>
+  </el-table>
+
+  <el-pagination background layout="prev, pager, next" :total="totalCount" @current-change="changeCurrentPage">
+  </el-pagination>
+</div>

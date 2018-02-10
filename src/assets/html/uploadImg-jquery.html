@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>uploadImage</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .upload-box {
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="upload-box">
+        <form id="uploadImage" method="post" enctype="multipart/form-data" action="/testUpload/uploadImgFile" target="testIframe">
+            <input type="file" name="file" id="testTile">
+        </form>
+        <iframe onload="iframLoad" id="testIframe" name="testIframe"></iframe>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/jquery.form/3.09/jquery.form.js"></script>
+    <script>
+        document.querySelector('#testTile').onchange = function () {
+            //console.info(document.getElementById('testTile').innerHTML)
+            document.getElementById('uploadImage').submit()
+        }
+
+        function iframLoad() {
+            //console.info('=====iframe load=====')
+            alert('---------------')
+        }
+    </script>
+</body>
+
+</html>

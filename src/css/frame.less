@@ -1,3 +1,17 @@
 .my-app{
-	margin: @page-gap @page-gap auto @page-gap;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+
+	.app-frame{
+		position: absolute;
+		top: @nav-height + @bread-height;
+		left: @left-menu-width;
+		right: 0;
+		bottom: 0;
+		overflow: auto;
+		background: @white;
+	}
 }

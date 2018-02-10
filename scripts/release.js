@@ -1,7 +1,7 @@
-const packageOperations = require('./releasePackageOperations')
-const tagOperations = require('./releaseTagOperations')
-const distOperations = require('./releaseDistOperations')
-const releaseCodeOperations = require('./releaseCodeOperations')
+const packageOperations = require('./release-package-operations')
+const tagOperations = require('./release-tag-operations')
+const distOperations = require('./release-dist-operations')
+const releaseCodeOperations = require('./release-code-operations')
 const version = process.argv ? (process.argv)[3] : ''
 const ora = require('ora')
 const chalk = require('chalk')

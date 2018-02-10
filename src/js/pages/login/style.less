@@ -1,12 +1,112 @@
+
+@login-panel-height: 5.6rem;
+@login-panel-width: 10rem;
+@blue-belt-height: .8rem;
+@input-row-height: .5rem;
+@btn-big-height: .46rem;
+
 .module-login{
-  .yd-ui-tab{
-    height: .46rem;
-    li span{
-      line-height: .46rem;
+  background: @white;
+  height: @login-panel-height;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  top: 50%;
+  margin: -@login-panel-height/2 0;
+
+  &:before{
+    content: " ";
+    position: absolute;
+    top: 50%;
+    height: @blue-belt-height;
+    width: 100%;
+    margin: -@blue-belt-height/2 - .4rem 0;
+    background-color: @blue-dark;
+  }
+
+  .logo{
+    width: 2.68rem;
+    height: .95rem;
+    background: url("../../../assets/images/logo-m.png") no-repeat;
+    top: .6rem;
+    position: absolute;
+  }
+
+  .login-box{
+    width: @login-panel-width;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin: 0 -@login-panel-width/2;
+    height: 100%;
+
+    &:before{
+      &:extend(.module-login:before);
+      background-image: url("../../../assets/images/smart-sampling.png");
+      background-position: left center;
+      background-repeat: no-repeat;
     }
   }
-  .tab-con{
-    padding: @con-gap + .05rem;
-    background-color: @white;
+}
+
+.single-edit-page{
+  .ad-pic{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../../../assets/images/ad-0.png") no-repeat bottom right;
+  }
+
+  .input-panel{
+    position: absolute;
+    width: 4.4rem;
+    top: 1.3rem + 1.55rem;
+  }
+
+  .input-row{
+    height: @input-row-height;
+    position: relative;
+    border-bottom: 1px solid @gray;
+    color: @black-middle;
+    font-size: @font-xs;
+
+    input{
+      // text-indent: .24rem;
+      padding: 0 .24rem;
+      width: 100%;
+    }
+
+    .rf-iconfont{
+      position: absolute;
+      left: 0;
+      top: .12rem;
+      z-index: 1;
+    }
+
+    .btn-get-pass{
+      float: left;
+    }
+
+    .btn-new-user{
+      float: right;
+    }
+  }
+
+  .btn-row{
+    height: 1rem;
+    border: 0;
+
+    .ui-btn-big{
+      top: 50%;
+      height: @btn-big-height;
+    }
+  }
+
+  .two-cell{
+    height: .2rem;
+    border: 0;
+    margin-top: -.15rem;
   }
 }

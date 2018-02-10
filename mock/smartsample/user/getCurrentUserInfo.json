@@ -1,0 +1,19 @@
+{
+  "code": "200",
+  "message": "获取成功",
+  "detailMessage": null,
+  "data": {
+    "avatarUrl": "",
+    "userId": 1,
+    "mobile": "18027337200",
+    "email": "jiaqi@rfchina.com",
+    "sellerId": "",
+    "realName": null,
+    "nickName": "模拟用户",
+    "gender": null,
+    "provinceCode": null,
+    "cityCode": null,
+    "areaCode": null,
+    "invoiceTitle": null
+  }
+}

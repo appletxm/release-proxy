@@ -1,6 +1,5 @@
 /* global Vue */
 import '../css/index.less'
-// import Vue from 'vue'
 import uiAdapt from 'utils/mobileAdapt'
 import axioDecorate from 'common/axioDecorate'
 import router from './router'

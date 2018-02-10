@@ -1,8 +1,8 @@
 import axios from 'axios'
 import apiUrls from 'common/apiUrls'
 import auth from 'common/auth'
-import storage from 'common/storage'
-import { SET_USER_INFO, SET_USER_LOGIN_STATUS } from 'store/mutationTypes'
+import { storage } from 'common/storage'
+import { SET_USER_INFO, SET_USER_LOGIN_STATUS } from 'store/mutation-types'
 import formValidate from 'utils/formValidate'
 import axioDecorate from 'common/axioDecorate'
 

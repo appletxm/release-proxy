@@ -4,7 +4,7 @@ const ora = require('ora')
 const path = require('path')
 const chalk = require('chalk')
 const webpack = require('webpack')
-const distOperations = require('./releaseDistOperations')
+const distOperations = require('./release-dist-operations')
 
 function build () {
   var spinner = ora('building for production...')
@@ -22,7 +22,7 @@ function build () {
         spinner.stop()
         throw err
       }
-      distOperations.createTagFile().then((_) => {
+      distOperations.createTarFile(process.argv[3] || 'production').then((_) => {
         spinner.stop()
         process.stdout.write(stats.toString({
             colors: true,

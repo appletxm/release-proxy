@@ -1,0 +1,22 @@
+<div class="change-password">
+	<div class="input-row">
+		<label>原密码：</label>
+		<input type="password" value="" placeholder="原密码" maxlength="16" autocomplete="off" v-model='oldPwd'/>
+	</div>
+
+	<div class="input-row">
+		<label>新密码：</label>
+		<input type="password" value="" placeholder="6-15位新密码" maxlength="16" autocomplete="off" v-model='newPwd'/>
+	</div>
+
+	<div class="input-row input-row-margin">
+		<label>确认新密码：</label>
+		<input type="password" value="" placeholder="确认新密码" maxlength="16" autocomplete="off" v-model='confirmPwd'/>
+	</div>
+
+	<div class="input-row btn-row">
+		<button class="ui-btn-big" @click='$doChangePass'>
+			提交
+		</button>
+	</div>
+</div>
