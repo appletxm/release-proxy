@@ -64,11 +64,6 @@ function recieveImageFile (req, res, next) {
       res.send(JSON.stringify(fileObj))
       res.end()
     } else {
-      // console.info('========image====2====')
-      // console.log('Parsing done.')
-      // console.dir(req.headers)
-      // console.log(fields)
-      // console.info(files['file'])
       console.log('****temp img path:', files['file']['path'])
 
       file = files['file']
@@ -103,6 +98,8 @@ function recieveImageFile (req, res, next) {
   })
 }
 
+function recieveMultipleFile (req, res, next) {}
+
 function assignRouter (req, res, next) {
   var reqPath = req.originalUrl
 
@@ -111,7 +108,7 @@ function assignRouter (req, res, next) {
     console.log('mock reqPath', reqPath.replace(/\?.*$/, ''))
     getMockFile(reqPath.replace(/\?.*$/, '') + '.json', res)
   } else if (process.env.NODE_ENV === 'development') {
-    serverProxy.doProxy(getProxyConfig(), req, res)
+    serverProxy.doProxy(getProxyConfig(req), req, res)
   }
 
   if (next) {
@@ -162,22 +159,6 @@ function routerRootPath (req, res, compiler) {
   getHtmlFile(compiler, filename, res)
 }
 
-function routerUploadFile (req, res, compiler, next) {
-  var reqPath = req.originalUrl
-
-  if (process.env.NODE_ENV === 'mock') {
-    isMock = true
-    console.log('mock reqPath', reqPath.replace(/\?.*$/, ''))
-    recieveImageFile(req, res, next)
-  } else if (process.env.NODE_ENV === 'development') {
-    serverProxy.doProxy(getProxyConfig(), req, res)
-  }
-
-  if (next) {
-    next()
-  }
-}
-
 function routerImgPath (req, res, compiler) {
   // var reqImgPath = req.baseUrl.match(/.+(assets.+)$/)[1]
   var filename = compiler ? path.join(compiler.outputPath, req.baseUrl.match(/.+(assets.+)$/)[1]) : path.join(__dirname, '../' + req.baseUrl + req.path)
@@ -187,6 +168,36 @@ function routerImgPath (req, res, compiler) {
 function routerHtmlPath (req, res, compiler) {
   var filename = path.join(compiler.outputPath, req.baseUrl.replace('/', ''))
   getHtmlFile(compiler, filename, res)
+}
+
+function routerUploadSingleFile (req, res, next) {
+  var reqPath = req.originalUrl
+
+  if (process.env.NODE_ENV === 'mock') {
+    isMock = true
+    console.log('mock reqPath', reqPath.replace(/\?.*$/, ''))
+    recieveImageFile(req, res, next)
+  } else if (process.env.NODE_ENV === 'development') {
+    serverProxy.doProxy(getProxyConfig(), req, res, true)
+  }
+  if (next) {
+    next()
+  }
+}
+
+function routerMultipleFile (req, res, next) {
+  var reqPath = req.originalUrl
+
+  if (process.env.NODE_ENV === 'mock') {
+    isMock = true
+    console.log('mock reqPath', reqPath.replace(/\?.*$/, ''))
+    recieveMultipleFile(req, res, next)
+  } else if (process.env.NODE_ENV === 'development') {
+    serverProxy.doProxy(getProxyConfig(), req, res, false)
+  }
+  if (next) {
+    next()
+  }
 }
 
 serverRouter = {
@@ -203,7 +214,9 @@ serverRouter = {
 
   'image': routerImgPath,
 
-  'uploadFile': routerUploadFile
+  'uploadSingleFile': routerUploadSingleFile,
+
+  'uploadMultipleFile': routerMultipleFile
 }
 
 module.exports = serverRouter

@@ -1,4 +1,4 @@
-## 富运通移动端
+## 基于express+nodejs的proxy
 
 > 1. javascript 技术栈vuejs + vue-router
 > 2. UI采用是的element-ui

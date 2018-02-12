@@ -40,8 +40,14 @@ app.use(express.static(__dirname + '/../dist'))
 
 app.use('*', serverRouter['*'])
 
-app.use(['*/upload*'], upload.single('file'), function (req, res, next) {
-  serverRouter['uploadFile'](req, res)
+// single file
+app.use(['*/uploadFile'], upload.single('file'), function (req, res) {
+  serverRouter['uploadSingleFile'](req, res)
+})
+
+// multiple file
+app.use(['*/multiFile'], upload.array('file', 10), function (req, res) {
+  serverRouter['uploadMultipleFile'](req, res)
 })
 
 app.use('/smartsample-seller', function (req, res) {

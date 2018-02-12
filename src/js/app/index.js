@@ -25,7 +25,7 @@ export default {
     },
 
     $chooseImgIe(event) {
-      document.querySelector('#js-upload-form').submit()
+      event.target.parentNode.submit()
     }
   },
   created() {

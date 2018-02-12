@@ -3,7 +3,7 @@ var fs = require('fs')
 var formidable = require('formidable')
 
 var serverProxy = {
-  doProxy: function (opt, request, response) {
+  doProxy: function (opt, request, response, isSingleFile) {
     var isMultipartData = false
     var contentType = request['headers']['content-type']
 
@@ -12,14 +12,12 @@ var serverProxy = {
 
     if (request.method === 'POST') {
       if(isMultipartData === true){
-        // this.doPostMultipartData(opt, request, response)
-        this.doPostMultipartDataNew(opt, request, response)
+        this.doPostMultipartData(opt, request, response, isSingleFile)
       } else {
         this.doPost(opt, request).then((result) => {
           this.createRequest(result, response, request)
         })
       }
-     
     } else {
       this.doGet(opt, request).then((result) => {
         this.createRequest(result, response, request)
@@ -101,66 +99,8 @@ var serverProxy = {
     return promise
   },
 
-  doPostMultipartDataNew: function(opt, request, response){
-    var bundle = ''
-    var options = {
-      host: opt.host, // 这里是代理服务器       
-      port: opt.port, // 这里是代理服务器端口 
-      method: request.method,
-      path: request.originalUrl,
-      headers: {...request.headers}
-    }
-    var boundaryKey = Math.random().toString(16) //随机数，目的是防止上传文件中出现分隔符导致服务器无法正确识别文件起始位置
-
-    var reqHttp = http.request(options, function(resHttp) {
-      console.log("statusCode: ", resHttp.statusCode)
-      console.log("headers: ", resHttp.headers)
-      resHttp.setEncoding('utf8')
-      resHttp.on('data', function(body) {
-        console.info('=====data=======', body)
-        bundle += body
-      })
-      resHttp.on('end', function() {
-        console.info('=======end=====')
-        response.headers = resHttp.headers
-        response.send(bundle)
-        response.end()
-      })
-    })
-    var payload = '--' + boundaryKey + '\r\n'
-    + 'Content-Type: ' + request.file.mimetype + '\r\n' 
-    + 'Content-Disposition: form-data; name="' + request.file.fieldname + '"; filename="' + request.file.originalname + '"\r\n'
-    + 'Content-Transfer-Encoding: binary\r\n\r\n'
-    var enddata  = '\r\n--' + boundaryKey + '--'
-
-    reqHttp.setHeader('Content-Type', 'multipart/form-data; boundary=' + boundaryKey + '')
-    reqHttp.setHeader('Content-Length', Buffer.byteLength(payload) + Buffer.byteLength(enddata) + request.file.size)
-    reqHttp.write(payload)
-
-    var fileStream = fs.createReadStream(request.file.path, { bufferSize: 4 * 1024 })
-    fileStream.pipe(reqHttp, {end: false})
-    fileStream.on('end', function() {
-      console.info('=======fileStream end=====')
-      reqHttp.end(enddata); 
-    })
-
-    reqHttp.on('error', function(e) {
-      console.error("error:"+e)
-    })
-  },
-
-  doPostMultipartData: function(opt, request, response){
+  doPostMultipartData: function(opt, request, response, isSingleFile){
     var options
-    var req
-    var form = new formidable.IncomingForm()
-    var boundaryKey = Math.random().toString(16)
-    var payload, endData, size
-    var body = ''
-
-    payload = '--' + boundaryKey + '\r\n'
-    endData  = '\r\n--' + boundaryKey + '--'
-    console.info('======boundaryKey', boundaryKey)
-
     options = {
       host: opt.host, // 这里是代理服务器       
       port: opt.port, // 这里是代理服务器端口 
@@ -168,58 +108,131 @@ var serverProxy = {
       path: request.originalUrl,
       headers: {...request.headers}
     }
+    
+    if(isSingleFile === true){
+      this.createSingleFileRequest(options, request.file, response)
+    } else {
+      this.createMultipleFileRequest(options, request.files, response)
+    }
+  },
+
+  createSingleFileRequest: function(options, file, response) {
+    var req, body
+    var boundaryKey = Math.random().toString(16)
+    var payload = '--' + boundaryKey + '\r\n'
+    var enddata  = '\r\n--' + boundaryKey + '--'
+    var fileStream
+
+    payload = payload
+    + 'Content-Type: ' + file.mimetype + '\r\n' 
+    + 'Content-Disposition: form-data; name="' + file.fieldname + '"; filename="' + file.originalname + '"\r\n'
+    + 'Content-Transfer-Encoding: binary\r\n\r\n'
+
+    options['headers']['Content-Type'] = 'multipart/form-data; boundary=' + boundaryKey + ''
+    options['headers']['Content-Length'] = Buffer.byteLength(payload) + Buffer.byteLength(enddata) + file.size
 
     req = http.request(options, function(res) {
-    	console.log("statusCode: ", res.statusCode)
-    	console.log("headers: ", res.headers)
-      
+      console.log("[PROXY SINGLE FILE STATUS CODE] ", res.statusCode)
       res.setEncoding('utf8')
-      //send data to response method 1
-      res.on('data', function (chunk) {
-        // console.log('[PROXY BODY]: ' + chunk)
-        body += chunk
+      res.on('data', function(bundle) {
+        body += (bundle || '')
       })
-      res.on('end', function () {
-        console.info('[PROXY response complete@@@@@@@@@@@]')
+      res.on('end', function() {
+        console.info('[PROXY SINGLE FILE COMPLETED]', body)
         response.headers = res.headers
+        response['headers']['Content-Type'] = 'text/plain;charset=UTF-8'
         response.send(body)
         response.end()
       })
     })
     req.on('error', function(e) {
-    	console.error("@@@@@@@error:" + e)
-    })
-    req.end(function () {
-      console.info('[PROXY Request success@@@@@@@@@@]')
+      console.error("error:"+e)
     })
 
-    form.parse(request, function (err, fields, files) {
-      for(var key in files){
-        var file = files[key]
-        // console.log('****file:', file['size'], file['name'], file['type'])
-        console.log('****temp file path:', files[key]['path'])
-
-        payload = payload + 'Content-Type: ' + file.type + '\r\n'
-        payload = payload + 'Content-Disposition: form-data; name="' + key + '"; filename="'+ file.name + '"\r\n'
-        payload = payload + 'Content-Transfer-Encoding: binary\r\n\r\n'
-
-        size = size + file.size
-
-        var fileStream = fs.createReadStream(files[key]['path'], { bufferSize: 4 * 1024 });
-        fileStream.pipe(req, {end: false});
-        fileStream.on('end', function() {
-          req.end(endData);
-        })
-      }
-
-      console.info('=====payload', payload + endData)
-    })
-    
-    req.setHeader('Content-Type', 'multipart/form-data; boundary=' + boundaryKey + '')
-    req.setHeader('Content-Length', Buffer.byteLength(payload) + Buffer.byteLength(enddata) + size)
     req.write(payload)
 
-    // response.send('aaaaaaaaaa')
+    fileStream = fs.createReadStream(file.path, { bufferSize: 4 * 1024 })
+    fileStream.pipe(req, {end: false})
+    fileStream.on('end', function() {
+      req.end(enddata); 
+    })
+  },
+
+  createMultipleFileRequest: function(options, files, response) {
+    var req, body
+    var boundaryKey = Math.random().toString(16)
+    var payload = ''
+    var enddata  = '\r\n--' + boundaryKey + '--'
+    var file = files[0]
+    var fileSize = 0
+    var payloadAll
+    var streamCount
+
+    for(var index in files){
+      fileSize = fileSize + files[index].size
+      payload = payload
+      + '--' + boundaryKey + '\r\n'
+      + 'Content-Type: ' + files[index].mimetype + '\r\n' 
+      + 'Content-Disposition: form-data; name="' + files[index].fieldname + '"; filename="' + files[index].originalname + '"\r\n'
+      + 'Content-Transfer-Encoding: binary\r\n\r\n'
+      files[index]['payload'] = payload
+      payloadAll = payloadAll + payload
+    }
+
+    options['headers']['Content-Type'] = 'multipart/form-data; boundary=' + boundaryKey + ''
+    options['headers']['Content-Length'] = Buffer.byteLength(payloadAll) + Buffer.byteLength(enddata) + fileSize
+
+    req = http.request(options, function(res) {
+      console.log("[PROXY SINGLE FILE STATUS CODE] ", res.statusCode)
+      res.setEncoding('utf8')
+      res.on('data', function(bundle) {
+        body += (bundle || '')
+      })
+      res.on('end', function() {
+        console.info('[PROXY SINGLE FILE COMPLETED]', body)
+        response.headers = res.headers
+        response['headers']['Content-Type'] = 'text/plain;charset=UTF-8'
+        response.send(body)
+        response.end()
+      })
+    })
+    req.on('error', function(e) {
+      console.error("error:"+e)
+    })
+
+    for(var i = 0; i < files.length; i++){
+      var tmpFile = files[i]
+      var fileStream
+
+      req.write(tmpFile.payload)
+      fileStream = fs.readFileSync(tmpFile.path)
+      req.write(fileStream)
+      if(i === files.length - 1){
+        req.end(enddata)
+      }
+    }
+  },
+
+  //TODO why the 'request' post function not works
+  createMultipleFileRequestUseRequest: function(options, files, response){
+    var formData = {}
+    var fileStreams = []
+    var request = require('request')
+
+    files.forEach(file => {
+      fileStreams.push(fs.createReadStream(file.path))
+    })
+
+    formData[files[0]['fieldname']] = fileStreams
+    options.formData = formData
+    options.url ='http://' + options.host + ':' + options.port + options.path
+
+    request.post(options, function optionalCallback(err, httpResponse, body) {
+      if (err) {
+        return console.error('upload failed:', err)
+      }
+      console.log('############', body)
+    })
   },
 
   doPostWWWForm: function(content, request, response) {
